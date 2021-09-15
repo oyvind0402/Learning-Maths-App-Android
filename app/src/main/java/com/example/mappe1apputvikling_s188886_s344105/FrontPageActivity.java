@@ -16,7 +16,6 @@ import android.widget.EditText;
 import java.util.Locale;
 
 public class FrontPageActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +66,11 @@ public class FrontPageActivity extends AppCompatActivity {
             byttLocale(land);
             recreate();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public void byttLocale(String land) {
