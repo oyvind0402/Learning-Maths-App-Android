@@ -7,7 +7,7 @@
     <string name="norsk">Norsk</string>
     <string name="tysk">Tysk</string>
     <string name="språk_forklaring">Velg enten norsk eller tysk</string>
-    <string name="endre_språk">Endre språk:</string>
-    <string name="endre_ant_spm">Endre antall spørsmål:</string>
+    <string name="endre_språk">Endre språk</string>
+    <string name="endre_ant_spm">Endre antall spørsmål</string>
     <string name="endre_ant_spm_info">Endre til 5, 10 eller 15</string>
 </resources>

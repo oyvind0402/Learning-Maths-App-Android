@@ -1,25 +1,20 @@
 <androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory
-        app:title="@string/endre_språk"
-        app:summary="@string/språk_forklaring">
-        <Preference
-            app:key="norskKnapp"
-            app:title="@string/norsk" />
-        <Preference
-            app:key="norskKnapp"
-            app:title="@string/tysk" />
+    <PreferenceCategory>
+        <ListPreference
+            app:defaultValue="no"
+            app:entries="@array/velgSpråk"
+            app:entryValues="@array/velgSpråkValues"
+            app:key="velgSpråk"
+            app:title="@string/endre_språk"
+            app:summary="@string/språk_forklaring"/>
     </PreferenceCategory>
-    <PreferenceCategory
-        app:title="@string/endre_ant_spm"
-        app:summary="@string/endre_ant_spm_info">
-        <Preference
-            app:key="norskKnapp"
-            app:title="5" />
-        <Preference
-            app:key="norskKnapp"
-            app:title="10" />
-        <Preference
-            app:key="norskKnapp"
-            app:title="15" />
+    <PreferenceCategory>
+        <ListPreference
+            app:defaultValue="5"
+            app:entries="@array/antallSpm"
+            app:entryValues="@array/antallSpmValues"
+            app:key="velgAntSpm"
+            app:title="@string/endre_ant_spm"
+            app:summary="@string/endre_ant_spm_info"/>
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

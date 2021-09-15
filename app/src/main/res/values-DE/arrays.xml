@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="antallSpm">
-        <item>5 spørsmål</item>
-        <item>10 spørsmål</item>
-        <item>15 spørsmål</item>
+        <item>5 Fragen</item>
+        <item>10 Fragen</item>
+        <item>15 Fragen</item>
     </string-array>
     <string-array name="antallSpmValues">
         <item>5</item>
@@ -11,8 +11,8 @@
         <item>15</item>
     </string-array>
     <string-array name="velgSpråk">
-        <item>Norsk</item>
-        <item>Tysk</item>
+        <item>Norwegisch</item>
+        <item>Deutsch</item>
     </string-array>
     <string-array name="velgSpråkValues">
         <item>no</item>

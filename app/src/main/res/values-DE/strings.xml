@@ -7,7 +7,7 @@
     <string name="norsk">Norwegisch</string>
     <string name="tysk">Deutsch</string>
     <string name="språk_forklaring">Wähle entweder Norwegisch oder Deutsch</string>
-    <string name="endre_språk">Sprache ändern:</string>
-    <string name="endre_ant_spm">Ändern Sie die Anzahl der Fragen:</string>
+    <string name="endre_språk">Sprache ändern</string>
+    <string name="endre_ant_spm">Ändern Sie die Anzahl der Fragen</string>
     <string name="endre_ant_spm_info">Wechseln Sie zu 5, 10 oder 15</string>
 </resources>
