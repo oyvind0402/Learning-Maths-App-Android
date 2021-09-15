@@ -11,4 +11,7 @@
     <color name="seStatistikk">#1689C9</color>
     <color name="preferanser">#F6454F</color>
     <color name="toolbar">#FF9900</color>
+    <color name="enter">#54B77E</color>
+    <color name="fjernKnap">#FF3D41</color>
+    <color name="kalkulatorKnap">#808080</color>
 </resources>
