@@ -10,6 +10,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.Locale;
 
@@ -19,6 +21,12 @@ public class FrontPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frontpage);
+
+        Button button = findViewById(R.id.start_spill);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), Spillet.class);
+            startActivity(intent);
+        });
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String land = prefs.getString("velgSpråk", "no");

@@ -46,25 +46,35 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/regnestykke"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginBottom="22dp"
-        android:text="1 + 1 ="
-        android:textSize="60sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-55dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/svar"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginBottom="22dp"
-        android:text="Svaret ditt er: 2"
-        android:textSize="40sp" />
+        <TextView
+            android:id="@+id/regnestykke"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="1 + 1 ="
+            android:textSize="60sp" />
+
+        <TextView
+            android:id="@+id/svar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2"
+            android:textSize="60sp" />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,17 +86,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
+
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
             android:text="7"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/button8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
+
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -98,6 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -115,6 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -126,6 +146,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -137,6 +159,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -154,6 +178,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -165,6 +191,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -176,6 +204,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -189,8 +219,10 @@
 
         <Button
             android:id="@+id/button0"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
+            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -200,9 +232,10 @@
 
         <Button
             android:id="@+id/buttonNullstille"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
@@ -213,9 +246,10 @@
 
         <Button
             android:id="@+id/buttonEquals"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:fontFamily="@font/covered_by_your_grace"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
