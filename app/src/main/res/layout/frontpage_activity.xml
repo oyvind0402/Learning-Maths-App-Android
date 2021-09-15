@@ -7,8 +7,7 @@
     android:duplicateParentState="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-
-    app:backgroundTint="@color/black"
+    android:fontFamily="sans-serif"
     >
 
     <androidx.appcompat.widget.Toolbar
@@ -20,7 +19,8 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:backgroundTint="@color/toolbar"
-        app:titleTextColor="#FFFFFF">
+        app:titleTextColor="#FFFFFF"
+        android:fontFamily="match_parent">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -28,7 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/app_name"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="match_parent"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -53,7 +56,8 @@
         android:insetRight="25dp"
         android:insetBottom="10dp"
         android:text="@string/start_spill"
-        app:backgroundTint="@color/startKnap" />
+        app:backgroundTint="@color/startKnap"
+        android:fontFamily="match_parent"/>
 
     <Button
         android:id="@+id/se_statistikk"
@@ -64,7 +68,8 @@
         android:insetRight="25dp"
         android:insetBottom="10dp"
         android:text="@string/se_statistikk"
-        app:backgroundTint="@color/seStatistikk" />
+        app:backgroundTint="@color/seStatistikk"
+        android:fontFamily="match_parent"/>
 
     <Button
         android:id="@+id/preferanser"
@@ -75,6 +80,7 @@
         android:insetRight="25dp"
         android:insetBottom="10dp"
         android:text="@string/preferanser"
-        app:backgroundTint="@color/preferanser" />
+        app:backgroundTint="@color/preferanser"
+        android:fontFamily="match_parent"/>
 
 </LinearLayout>
