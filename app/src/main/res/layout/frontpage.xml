@@ -80,6 +80,7 @@
         android:insetRight="25dp"
         android:insetBottom="10dp"
         android:text="@string/preferanser"
+        android:onClick="visPreferanser"
         app:backgroundTint="@color/preferanser"
         android:fontFamily="match_parent"/>
 
