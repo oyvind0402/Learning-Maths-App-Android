@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Mathe-Training</string>
-    <string name="til_statistikk">Siehe Statistiken</string>
+    <string name="se_statistikk">Siehe Statistiken</string>
     <string name="preferanser">Einstellungen</string>
     <string name="start_spill">Spiele starten</string>
+    <string name="app_icon">App icon</string>
+
 </resources>
