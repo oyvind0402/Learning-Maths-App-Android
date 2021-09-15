@@ -19,6 +19,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Spillet"
+            android:exported="true"
+            android:parentActivityName=".FrontPageActivity" />
+        <activity
             android:name=".Preferanser"
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
