@@ -27,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preferanser);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.settings_container, new PreferanceFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.settings_container, new SettingsFragment()).commit();
     }
 
     @Override
