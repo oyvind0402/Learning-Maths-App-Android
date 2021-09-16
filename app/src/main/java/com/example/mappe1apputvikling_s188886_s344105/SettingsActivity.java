@@ -11,7 +11,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
 
-public class PreferanceActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         if(key.equals("velgSpråk")) {

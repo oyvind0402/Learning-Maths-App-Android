@@ -1,12 +1,12 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
-import android.app.Application;
-import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+
 
 public class PreferanceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
     @Override

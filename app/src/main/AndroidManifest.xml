@@ -23,7 +23,11 @@
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
         <activity
-            android:name=".PreferanceActivity"
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:parentActivityName=".FrontPageActivity" />
+        <activity
+            android:name=".StatisticsActivity"
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
         <meta-data

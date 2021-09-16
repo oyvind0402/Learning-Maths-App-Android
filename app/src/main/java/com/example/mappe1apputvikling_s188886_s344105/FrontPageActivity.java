@@ -34,7 +34,6 @@ public class FrontPageActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String land = prefs.getString("velgSpråk", "no");
-        String antSpm = prefs.getString("velgAntSpm", "15");
         Locale locale = getResources().getConfiguration().locale;
 
         if(!locale.toString().equals(land)) {
@@ -87,7 +86,7 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void visPreferanser(View v) {
-        Intent intent = new Intent(this, PreferanceActivity.class);
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

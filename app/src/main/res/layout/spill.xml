@@ -60,7 +60,6 @@
             android:layout_gravity="center"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="1 + 1 ="
             android:textSize="60sp" />
 
         <TextView
@@ -70,7 +69,6 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="2"
             android:textSize="60sp" />
     </LinearLayout>
 
@@ -253,10 +251,21 @@
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="svar"
             android:text="Enter"
             app:backgroundTint="@color/enter"
             />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/start_spill_knapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/covered_by_your_grace"
+        android:insetLeft="140dp"
+        android:insetRight="140dp"
+        android:text="@string/start_spill"
+        android:onClick="startSpill"/>
 
 
 </LinearLayout>
