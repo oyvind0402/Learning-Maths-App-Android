@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.Locale;
 
@@ -23,7 +22,13 @@ public class FrontPageActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.start_spill);
         button.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), Spillet.class);
+            Intent intent = new Intent(view.getContext(), GameActivity.class);
+            startActivity(intent);
+        });
+
+        Button se_statistikk = findViewById(R.id.se_statistikk);
+        se_statistikk.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), StatisticsActivity.class);
             startActivity(intent);
         });
 
@@ -82,7 +87,7 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void visPreferanser(View v) {
-        Intent intent = new Intent(this, Preferanser.class);
+        Intent intent = new Intent(this, PreferanceActivity.class);
         startActivity(intent);
     }
 }

@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Spillet"
+            android:name=".GameActivity"
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
         <activity
-            android:name=".Preferanser"
+            android:name=".PreferanceActivity"
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
         <meta-data

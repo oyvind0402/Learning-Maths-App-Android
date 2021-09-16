@@ -1,6 +1,5 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
-import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -12,7 +11,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
 
-public class Preferanser extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PreferanceActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         if(key.equals("velgSpråk")) {
@@ -28,7 +27,7 @@ public class Preferanser extends AppCompatActivity implements SharedPreferences.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preferanser);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.settings_container, new PreferanseFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.settings_container, new PreferanceFragment()).commit();
     }
 
     @Override
