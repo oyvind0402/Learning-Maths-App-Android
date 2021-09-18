@@ -237,7 +237,7 @@
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
-            android:text="Fjern"
+            android:text="@string/fjern"
             app:backgroundTint="@color/fjernKnap"
             />
 
@@ -252,7 +252,7 @@
             android:insetRight="10dp"
             android:insetBottom="10dp"
             android:onClick="svar"
-            android:text="Enter"
+            android:text="@string/svar"
             app:backgroundTint="@color/enter"
             />
     </LinearLayout>

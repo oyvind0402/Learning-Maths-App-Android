@@ -10,4 +10,6 @@
     <string name="endre_språk">Sprache ändern</string>
     <string name="endre_ant_spm">Ändern Sie die Anzahl der Fragen</string>
     <string name="endre_ant_spm_info">Wechseln Sie zu 5, 10 oder 15</string>
+    <string name="fjern">Fernbedienung</string>
+    <string name="svar">Antworten</string>
 </resources>
