@@ -12,4 +12,18 @@
     <string name="endre_ant_spm_info">Wechseln Sie zu 5, 10 oder 15</string>
     <string name="fjern">Fernbedienung</string>
     <string name="svar">Antworten</string>
+    <string name="riktige_svar">Korrekte Antworten: </string>
+    <string name="feil_svar">Falsche Antworten: </string>
+    <string name="slett_statistikk">Statistiken löschen</string>
+    <string name="din_statistikk">Ihre Statistik</string>
+    <string name="_8">8</string>
+    <string name="_7">7</string>
+    <string name="_9">9</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_0">0</string>
 </resources>

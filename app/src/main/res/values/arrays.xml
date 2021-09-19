@@ -19,21 +19,21 @@
         <item>de</item>
     </string-array>
     <string-array name="regneStykker">
-        <item>2 + 2</item>
-        <item>7 + 1</item>
-        <item>2 x 3</item>
-        <item>8 : 2</item>
-        <item>0 x 10</item>
-        <item>3 + 7</item>
-        <item>6 : 3</item>
-        <item>9 + 5</item>
-        <item>13 - 4</item>
-        <item>6 - 2</item>
-        <item>2 + 3</item>
-        <item>4 x 3</item>
-        <item>5 + 8</item>
-        <item>2 x 6</item>
-        <item>12 : 6</item>
+        <item>2 + 2 =</item>
+        <item>7 + 1 =</item>
+        <item>2 x 3 =</item>
+        <item>8 : 2 =</item>
+        <item>0 x 10 =</item>
+        <item>3 + 7 =</item>
+        <item>6 : 3 =</item>
+        <item>9 + 5 =</item>
+        <item>13 - 4 =</item>
+        <item>6 - 2 =</item>
+        <item>2 + 3 =</item>
+        <item>4 x 3 =</item>
+        <item>5 + 8 =</item>
+        <item>2 x 6 =</item>
+        <item>12 : 6 =</item>
     </string-array>
     <string-array name="regneStykkeSvar">
         <item>4</item>
