@@ -26,6 +26,10 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.spill);
     }
 
+    // Mangler å gjøre sånn at man velger 5 tilfeldige spørsmål per spill, og at de 5 ikke skal gjentas i samme spillsession. Og at når man da har svart på 5 spørsmål 3 ganger at det skal komme f.eks
+    // en dialogboks for å si ifra til spilleren at det er tomt for spørsmål.
+
+    // Mangler også å lagre alle verdier til SharedPreferences sånn at spillet henter verdier fra SharedPreferences i stedet for fra variabler her ettersom de blir reset når man bytter til landscape modus.
     public void startSpill(View v) {
         startAntall = 0;
         riktigeSvar = 0;
