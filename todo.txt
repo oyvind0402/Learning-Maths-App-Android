@@ -1,0 +1,10 @@
+Landscape mode slik at alt lagres og ikke blir borte
+
+Lagring av total antall spill i gameactivity
+
+Settings at språket endret seg med en gang
+
+Ekstra:
+- Mer statistikk, se på forrige spill
+- legge til fyrverkeri eller noe sånt
+- Endre font eller erstate tallene med bilder?
