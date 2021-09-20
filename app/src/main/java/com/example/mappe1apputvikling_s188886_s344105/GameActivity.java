@@ -8,19 +8,31 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener{
+public class GameActivity extends AppCompatActivity implements View.OnClickListener, FerdigSpillDialog.DialogClickListener{
     ArrayList<String> alleRegneStykker = new ArrayList();
     ArrayList<Integer> alleRegneStykkerSvar = new ArrayList();
     private int riktigeSvar = 0;
     private int feilSvar = 0;
     private int antallRegnestykker = 0;
     private boolean startetSpill = false;
+
+    @Override
+    public void onCancelClick() {
+        finish();
+    }
+
+    @SuppressLint("ResourceType")
+    @Override
+    public void onContinueClick() {
+        startSpill(findViewById(R.layout.spill));
+    }
 
     @SuppressLint("ResourceType")
     @Override
@@ -88,6 +100,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             nyRegneStykke();
         } else {
             // Spillet er ferdig opp med pop upen
+            DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
+            fortsett.show(getSupportFragmentManager(), "Avslutt?");
         }
         /*
                 SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);

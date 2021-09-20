@@ -12,10 +12,14 @@
     <string name="endre_ant_spm_info">Endre til 5, 10 eller 15</string>
     <string name="fjern">Fjern</string>
     <string name="svar">Svar</string>
-    <string name="riktige_svar">Riktige svar: </string>
+    <string name="riktige_svar">Riktige svar:</string>
     <string name="feil_svar">Feil svar: </string>
     <string name="slett_statistikk">Slett statistikk</string>
     <string name="din_statistikk">Din statistikk</string>
+    <string name="gratulerer">Gratulerer! Vil du spille igjen eller avslutte?</string>
+    <string name="avsluttspill">Avslutt</string>
+    <string name="fortsettspill">Fortsett spilling!</string>
+    <string name="avslutt_fortsett">Avslutt eller fortsett?</string>
     <string name="_8">8</string>
     <string name="_7">7</string>
     <string name="_9">9</string>
