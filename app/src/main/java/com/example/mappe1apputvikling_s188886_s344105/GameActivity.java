@@ -48,6 +48,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     // Mangler også å lagre alle verdier til SharedPreferences sånn at spillet henter verdier fra SharedPreferences i stedet for fra variabler her ettersom de blir reset når man bytter til landscape modus.
     public void startSpill(View v) {
+        alleRegneStykker.clear();
+        alleRegneStykkerSvar.clear();
+        riktigeSvar = 0;
+        feilSvar = 0;
         startetSpill = true;
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -66,8 +70,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void nyRegneStykke(){
-        int tall1 = (int)(Math.random() * 9);
-        int tall2 = (int)(Math.random() * 9);
+        int tall1 = (int)(Math.random() * 10);
+        int tall2 = (int)(Math.random() * 10);
 
         String regneStykkeSpm = tall1 + " + " + tall2 + " =";
         alleRegneStykker.add(regneStykkeSpm);
@@ -99,15 +103,37 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(startetSpill){
             nyRegneStykke();
         } else {
+            SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+
+            String totalRiktigeString = setPrefs.getString("riktigeSvar", "");
+            int totalRiktige = 0;
+            try {
+                totalRiktige = Integer.parseInt(totalRiktigeString);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+            String totalFeilString = setPrefs.getString("feilSvar", "");
+            int totalFeil = 0;
+            try {
+                totalFeil = Integer.parseInt(totalFeilString);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            totalRiktige += riktigeSvar;
+            totalFeil += feilSvar;
+
+            editor.putString("riktigeSvar", String.valueOf(totalRiktige));
+            editor.putString("feilSvar", String.valueOf(totalFeil));
+            editor.apply();
+
             // Spillet er ferdig opp med pop upen
             DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
+            fortsett.setCancelable(false);
             fortsett.show(getSupportFragmentManager(), "Avslutt?");
         }
-        /*
-                SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                SharedPreferences.Editor editor = setPrefs.edit();
-                editor.putString("riktigeSvar", String.valueOf(riktigeSvar));
-                editor.putString("feilSvar", String.valueOf(feilSvar));*/
+
 
     }
 
@@ -154,10 +180,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
         } else {
-            switch (v.getId()) {
-                case R.id.buttonNullstille:
-                    svar.setText("");
-                    break;
+            if (v.getId() == R.id.buttonNullstille) {
+                svar.setText("");
             }
 
             //feedback i tillfelle det er allerede 3 sifre
