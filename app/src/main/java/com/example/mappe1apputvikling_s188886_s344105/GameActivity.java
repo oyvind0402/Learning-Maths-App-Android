@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener{
     String[] alleRegneStykker;
     String[] alleRegneStykkerSvar;
     private int riktigeSvar = 0;
@@ -26,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
         alleRegneStykker = getResources().getStringArray(R.array.regneStykker);
         alleRegneStykkerSvar = getResources().getStringArray(R.array.regneStykkeSvar);
         setContentView(R.layout.spill);
+        setButtons();
         startSpill(findViewById(R.layout.spill));
     }
 
@@ -44,7 +46,6 @@ public class GameActivity extends AppCompatActivity {
         TextView avsluttSpill2 = findViewById(R.id.feilsvar);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar));
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar));
-
         startetSpill = true;
     }
 
@@ -93,92 +94,78 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void fjern(View v) {
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n", "ResourceType"})
+    @Override
+    public void onClick(View v){ // Denne funksjonen blir aktivert dersom man trykker på 0-9 eller fjern knappen
         TextView svar = findViewById(R.id.svar);
         String text = svar.getText().toString();
-        if (text.length() > 0) {
-            text = text.substring(0, text.length() - 1);
-            svar.setText(text);
+
+        if(startetSpill && svar.getText().toString().length() < 3) { // Det skal ikke være mulig å skrive mer enn 3 tall
+            switch (v.getId()) {
+                case R.id.button0:
+                    svar.setText(text + "0");
+                    break;
+                case R.id.button1:
+                    svar.setText(text + "1");
+                    break;
+                case R.id.button2:
+                    svar.setText(text + "2");
+                    break;
+                case R.id.button3:
+                    svar.setText(text + "3");
+                    break;
+                case R.id.button4:
+                    svar.setText(text + "4");
+                    break;
+                case R.id.button5:
+                    svar.setText(text + "5");
+                    break;
+                case R.id.button6:
+                    svar.setText(text + "6");
+                    break;
+                case R.id.button7:
+                    svar.setText(text + "7");
+                    break;
+                case R.id.button8:
+                    svar.setText(text + "8");
+                    break;
+                case R.id.button9:
+                    svar.setText(text + "9");
+                    break;
+                case R.id.buttonNullstille:
+                    svar.setText("");
+                    break;
+            }
+        } else {
+
+            //feedback i tillfelle det er allerede 3 sifre
+
         }
     }
 
-    public void trykk0(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "0");
-        }
-    }
+    public void setButtons(){
+        Button button0 = findViewById(R.id.button0);
+        Button button1 = findViewById(R.id.button1);
+        Button button2 = findViewById(R.id.button2);
+        Button button3 = findViewById(R.id.button3);
+        Button button4 = findViewById(R.id.button4);
+        Button button5 = findViewById(R.id.button5);
+        Button button6 = findViewById(R.id.button6);
+        Button button7 = findViewById(R.id.button7);
+        Button button8 = findViewById(R.id.button8);
+        Button button9 = findViewById(R.id.button9);
+        Button button10 = findViewById(R.id.buttonNullstille);
 
-    public void trykk1(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "1");
-        }
-    }
-
-    public void trykk2(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "2");
-        }
-    }
-
-    public void trykk3(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "3");
-        }
-    }
-
-    public void trykk4(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "4");
-        }
-    }
-
-    public void trykk5(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "5");
-        }
-    }
-
-    public void trykk6(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "6");
-        }
-    }
-
-    public void trykk7(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "7");
-        }
-    }
-
-    public void trykk8(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "8");
-        }
-    }
-
-    public void trykk9(View v) {
-        TextView svar = findViewById(R.id.svar);
-        if(startetSpill && svar.getText().toString().length() < 3) {
-            String text = svar.getText().toString();
-            svar.setText(text + "9");
-        }
+        button0.setOnClickListener(this);
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
+        button4.setOnClickListener(this);
+        button5.setOnClickListener(this);
+        button6.setOnClickListener(this);
+        button7.setOnClickListener(this);
+        button8.setOnClickListener(this);
+        button9.setOnClickListener(this);
+        button10.setOnClickListener(this);
     }
 }
