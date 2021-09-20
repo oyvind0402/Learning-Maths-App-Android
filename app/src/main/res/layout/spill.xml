@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:duplicateParentState="true"
     android:fitsSystemWindows="true"
     android:fontFamily="sans-serif"
@@ -271,14 +271,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
+       <!-- <Button
             android:id="@+id/start_spill_knapp"
             android:layout_width="115dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:fontFamily="@font/covered_by_your_grace"
             android:onClick="startSpill"
-            android:text="@string/start_spill" />
+            android:text="@string/start_spill" /> -->
 
         <TextView
             android:id="@+id/riktigesvar"

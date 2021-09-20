@@ -1,5 +1,6 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -18,12 +19,14 @@ public class GameActivity extends AppCompatActivity {
     private int startAntall = 0;
     private boolean startetSpill = false;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         alleRegneStykker = getResources().getStringArray(R.array.regneStykker);
         alleRegneStykkerSvar = getResources().getStringArray(R.array.regneStykkeSvar);
         setContentView(R.layout.spill);
+        startSpill(findViewById(R.layout.spill));
     }
 
     // Mangler å gjøre sånn at man velger 5 tilfeldige spørsmål per spill, og at de 5 ikke skal gjentas i samme spillsession. Og at når man da har svart på 5 spørsmål 3 ganger at det skal komme f.eks
