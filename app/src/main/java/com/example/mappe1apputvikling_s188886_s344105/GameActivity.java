@@ -2,17 +2,22 @@ package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, FerdigSpillDialog.DialogClickListener{
@@ -22,6 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int feilSvar = 0;
     private int antallRegnestykker = 0;
     private boolean startetSpill = false;
+    private int antallSpill = 0;
 
     @Override
     public void onCancelClick() {
@@ -34,6 +40,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         startSpill(findViewById(R.layout.spill));
     }
 
+    /*  Metode for å lage en popup når man trykker på tilbakeknappen - skal skrive den i morgen!
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+    }
+     */
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +54,44 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.spill);
         setButtons();
         startSpill(findViewById(R.layout.spill));
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String land = prefs.getString("velgSpråk", "no");
+        Locale locale = getResources().getConfiguration().locale;
+
+        if(!locale.toString().equals(land)) {
+            byttLocale(land);
+            recreate();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String land = prefs.getString("velgSpråk", "no");
+        Locale locale = getResources().getConfiguration().locale;
+
+        if(!locale.toString().equals(land)) {
+            byttLocale(land);
+            recreate();
+        }
+    }
+
+    // Må legge til at alle verdier blir lagret til shared preferences når onPause kalles - og så må vi hente verdiene tilbake i onResume.
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String land = prefs.getString("velgSpråk", "no");
+        Locale locale = getResources().getConfiguration().locale;
+
+        if(!locale.toString().equals(land)) {
+            byttLocale(land);
+            recreate();
+        }
     }
 
     // Mangler å gjøre sånn at man velger 5 tilfeldige spørsmål per spill, og at de 5 ikke skal gjentas i samme spillsession. Og at når man da har svart på 5 spørsmål 3 ganger at det skal komme f.eks
@@ -121,11 +172,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(e.getMessage());
             }
 
+            antallSpill += 1;
             totalRiktige += riktigeSvar;
             totalFeil += feilSvar;
 
             editor.putString("riktigeSvar", String.valueOf(totalRiktige));
             editor.putString("feilSvar", String.valueOf(totalFeil));
+            editor.putString("antallSpill", String.valueOf(antallSpill));
             editor.apply();
 
             // Spillet er ferdig opp med pop upen
@@ -213,5 +266,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         button8.setOnClickListener(this);
         button9.setOnClickListener(this);
         button10.setOnClickListener(this);
+    }
+
+    public void byttLocale(String land) {
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration cf = res.getConfiguration();
+        cf.setLocale(new Locale(land));
+        res.updateConfiguration(cf, dm);
     }
 }

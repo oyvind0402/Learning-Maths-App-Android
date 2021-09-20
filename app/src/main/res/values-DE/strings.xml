@@ -20,6 +20,9 @@
     <string name="avsluttspill">Ausgang</string>
     <string name="fortsettspill">Weiter spielen!</string>
     <string name="avslutt_fortsett">Beenden oder fortfahren?</string>
+    <string name="totalt_antall_spill">Gesamtzahl der Spiele:</string>
+    <string name="totalt_antall_riktige">Gesamtzahl richtiger Antworten:</string>
+    <string name="totalt_antall_feil">Gesamtzahl der falschen Antworten:</string>
     <string name="_8">8</string>
     <string name="_7">7</string>
     <string name="_9">9</string>
