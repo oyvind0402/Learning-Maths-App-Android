@@ -10,22 +10,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
-    String[] alleRegneStykker;
-    String[] alleRegneStykkerSvar;
+    ArrayList<String> alleRegneStykker = new ArrayList();
+    ArrayList<Integer> alleRegneStykkerSvar = new ArrayList();
     private int riktigeSvar = 0;
     private int feilSvar = 0;
-    private int startAntall = 0;
+    private int antallRegnestykker = 0;
     private boolean startetSpill = false;
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        alleRegneStykker = getResources().getStringArray(R.array.regneStykker);
-        alleRegneStykkerSvar = getResources().getStringArray(R.array.regneStykkeSvar);
         setContentView(R.layout.spill);
         setButtons();
         startSpill(findViewById(R.layout.spill));
@@ -36,62 +36,65 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     // Mangler også å lagre alle verdier til SharedPreferences sånn at spillet henter verdier fra SharedPreferences i stedet for fra variabler her ettersom de blir reset når man bytter til landscape modus.
     public void startSpill(View v) {
-        startAntall = 0;
-        riktigeSvar = 0;
-        feilSvar = 0;
-        String forsteSpm = alleRegneStykker[startAntall];
-        TextView regneStykke = findViewById(R.id.regnestykke);
-        regneStykke.setText(forsteSpm);
-        TextView avsluttSpill = findViewById(R.id.riktigesvar);
+        startetSpill = true;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String antSpm = prefs.getString("velgAntSpm", "5");
+        antallRegnestykker = Integer.parseInt(antSpm);
+
+        nyRegneStykke();
+
+
+
+        /*TextView avsluttSpill = findViewById(R.id.riktigesvar);
         TextView avsluttSpill2 = findViewById(R.id.feilsvar);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar));
-        avsluttSpill2.setText(getResources().getString(R.string.feil_svar));
-        startetSpill = true;
+        avsluttSpill2.setText(getResources().getString(R.string.feil_svar));*/
+
+    }
+
+    public void nyRegneStykke(){
+        int tall1 = (int)(Math.random() * 9);
+        int tall2 = (int)(Math.random() * 9);
+
+        String regneStykkeSpm = tall1 + " + " + tall2 + " =";
+        alleRegneStykker.add(regneStykkeSpm);
+        TextView regneStykke = findViewById(R.id.regnestykke);
+        regneStykke.setText(regneStykkeSpm);
+
+        int svar = tall1 + tall2;
+        alleRegneStykkerSvar.add(svar);
     }
 
     public void svar(View v) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String antSpm = prefs.getString("velgAntSpm", "5");
-        int maxAntall = Integer.parseInt(antSpm);
+        if(alleRegneStykker.size() == antallRegnestykker) {
+            startetSpill = false;
+        }
 
         TextView svar = findViewById(R.id.svar);
-        TextView regneStykke = findViewById(R.id.regnestykke);
-        if(startetSpill) {
-            if(startAntall < maxAntall - 1) {
-                for (int i = 0; i < maxAntall - 1; i++) {
-                    if(regneStykke.getText().equals(alleRegneStykker[i])) {
-                        if (svar.getText().equals(alleRegneStykkerSvar[i])) {
-                            riktigeSvar += 1;
-                        } else {
-                            feilSvar += 1;
-                        }
-                    }
-                }
-                startAntall += 1;
-                regneStykke.setText(alleRegneStykker[startAntall]);
-            } else {
-                if(regneStykke.getText().equals(alleRegneStykker[maxAntall - 1])) {
-                    if(svar.getText().equals(alleRegneStykkerSvar[maxAntall - 1])) {
-                        riktigeSvar += 1;
-                    } else {
-                        feilSvar += 1;
-                    }
-                }
-                TextView avsluttSpill = findViewById(R.id.riktigesvar);
-                String text = avsluttSpill.getText().toString();
-                avsluttSpill.setText(text + " " + String.valueOf(riktigeSvar));
-                TextView avsluttSpill2 = findViewById(R.id.feilsvar);
-                String text2 = avsluttSpill2.getText().toString();
-                avsluttSpill2.setText(text2 + " " + String.valueOf(feilSvar));
-                regneStykke.setText("");
-                startetSpill = false;
+        String gitSvar = (String) svar.getText();
+        int gitSvarInt = Integer.parseInt(gitSvar);
+        int korrektSvar = alleRegneStykkerSvar.get(alleRegneStykkerSvar.size() - 1);
+        svar.setText("");
+
+        if(gitSvarInt == korrektSvar){
+            riktigeSvar += 1;
+        } else {
+            feilSvar += 1;
+        }
+
+
+        if(startetSpill){
+            nyRegneStykke();
+        } else {
+            // Spillet er ferdig opp med pop upen
+        }
+        /*
                 SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
                 SharedPreferences.Editor editor = setPrefs.edit();
                 editor.putString("riktigeSvar", String.valueOf(riktigeSvar));
-                editor.putString("feilSvar", String.valueOf(feilSvar));
-            }
-            svar.setText("");
-        }
+                editor.putString("feilSvar", String.valueOf(feilSvar));*/
+
     }
 
     @SuppressLint({"NonConstantResourceId", "SetTextI18n", "ResourceType"})
@@ -100,7 +103,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         TextView svar = findViewById(R.id.svar);
         String text = svar.getText().toString();
 
-        if(startetSpill && svar.getText().toString().length() < 3) { // Det skal ikke være mulig å skrive mer enn 3 tall
+        if(svar.getText().toString().length() < 3) { // Det skal ikke være mulig å skrive mer enn 3 tall
             switch (v.getId()) {
                 case R.id.button0:
                     svar.setText(text + "0");
@@ -137,6 +140,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
         } else {
+            switch (v.getId()) {
+                case R.id.buttonNullstille:
+                    svar.setText("");
+                    break;
+            }
 
             //feedback i tillfelle det er allerede 3 sifre
 
