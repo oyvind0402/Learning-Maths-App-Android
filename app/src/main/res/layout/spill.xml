@@ -278,5 +278,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"/>
 
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/viewKonfetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
