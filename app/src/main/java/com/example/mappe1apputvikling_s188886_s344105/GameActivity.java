@@ -164,10 +164,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
+
             String totalFeilString = setPrefs.getString("feilSvar", "");
             int totalFeil = 0;
             try {
                 totalFeil = Integer.parseInt(totalFeilString);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            String totalAntallSpillString = setPrefs.getString("antallSpill", "");
+            try {
+                antallSpill = Integer.parseInt(totalAntallSpillString);
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }

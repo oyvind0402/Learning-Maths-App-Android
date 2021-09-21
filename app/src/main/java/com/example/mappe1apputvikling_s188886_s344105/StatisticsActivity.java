@@ -1,10 +1,12 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +47,22 @@ public class StatisticsActivity extends AppCompatActivity {
             byttLocale(land);
             recreate();
         }
+    }
+
+    public void slettStatistikk(View view) {
+
+        SharedPreferences nullstill = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = nullstill.edit();
+
+        editor.putString("antallSpill", "0");
+        editor.putString("riktigeSvar", "0");
+        editor.putString("feilSvar", "0");
+        editor.apply();
+
+        recreate();
+
+
+
     }
 
     @Override
