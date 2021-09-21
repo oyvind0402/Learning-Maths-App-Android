@@ -1,5 +1,5 @@
 Landscape mode slik at alt lagres og ikke blir borte
-
+Regnestykker i XML
 Make the design more child proof
 
 Ekstra:
