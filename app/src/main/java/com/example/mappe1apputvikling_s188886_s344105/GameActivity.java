@@ -30,7 +30,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Random;
 
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
@@ -75,9 +77,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        order.clear();
+        for(int i = 0; i < 15; i++){
+            order.add(i);
+        }
+        Collections.shuffle(order);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spill);
         setButtons();
+
         startSpill(findViewById(R.layout.spill));
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -132,7 +141,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     // Mangler også å lagre alle verdier til SharedPreferences sånn at spillet henter verdier fra SharedPreferences i stedet for fra variabler her ettersom de blir reset når man bytter til landscape modus.
     @SuppressLint("SetTextI18n")
     public void startSpill(View v) {
-        order.clear();
         startetSpill = true;
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -141,10 +149,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
-
-        for(int i = 0; i < 15; i++){
-            order.add(i);
-        }
 
         setRegneStykke();
         TextView avsluttSpill = findViewById(R.id.riktigesvar);
@@ -156,8 +160,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     private void setRegneStykke() {
         TextView regneStykke = findViewById(R.id.regnestykke);
-        regneStykke.setText(spm[svarteRegnestykker]);
-        svarteRegnestykker += 1;
+        regneStykke.setText(spm[order.get(svarteRegnestykker)]);
     }
 
     @SuppressLint("SetTextI18n")
@@ -168,7 +171,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if(gitSvar.length() > 0) {
             int gitSvarInt = Integer.parseInt(gitSvar);
-            int korrektSvar = Integer.parseInt(svar[antallRegnestykker]);
+            int korrektSvar = Integer.parseInt(svar[order.get(svarteRegnestykker)]);
+            svarteRegnestykker += 1;
 
             if(gitSvarInt == korrektSvar){
                 riktigeSvar += 1;
@@ -185,7 +189,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
             avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
+
             if(startetSpill){
+                //Sjekke om det fortsatt finnes flere
                 setRegneStykke();
             } else {
                 SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
