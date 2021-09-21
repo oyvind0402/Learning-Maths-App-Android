@@ -232,6 +232,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
             KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
 
+            viewKonfetti.bringToFront();
+
             viewKonfetti.build()
                     .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
                     .setDirection(0.0, 359.0)
