@@ -232,7 +232,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
             KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
 
-            viewKonfetti.bringToFront();
+            //viewKonfetti.bringToFront();
+
 
             viewKonfetti.build()
                     .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
@@ -245,6 +246,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
                     .streamFor(300, 2500);
 
+
+
+
             //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
             // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
             viewKonfetti.postDelayed(new Runnable() {
@@ -254,7 +258,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     fortsett.setCancelable(false);
                     fortsett.show(getSupportFragmentManager(), "Avslutt?");
                 }
-            }, 1000);
+            }, 200);
+
 
             /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
                     R.anim.rotation);
