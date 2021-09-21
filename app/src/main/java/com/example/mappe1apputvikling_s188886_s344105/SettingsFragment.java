@@ -1,7 +1,6 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.content.SharedPreferences;
-
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         requireActivity().recreate();
     }
 
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         return false;
@@ -47,6 +45,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
     }
+
     public void byttLocale(String land) {
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

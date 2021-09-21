@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
@@ -41,15 +40,6 @@ public class StatisticsActivity extends AppCompatActivity {
         antallSpill.setText(text);
         antallRiktige.setText(text2);
         antallFeil.setText(text3);
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String land = prefs.getString("velgSpråk", "no");
-        Locale locale = getResources().getConfiguration().locale;
-
-        if(!locale.toString().equals(land)) {
-            byttLocale(land);
-            recreate();
-        }
     }
 
     public void rotering(View view){
@@ -92,15 +82,6 @@ public class StatisticsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String land = prefs.getString("velgSpråk", "no");
-        Locale locale = getResources().getConfiguration().locale;
-
-        if(!locale.toString().equals(land)) {
-            byttLocale(land);
-            recreate();
-        }
     }
 
     public void byttLocale(String land) {

@@ -1,6 +1,5 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -12,7 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -45,15 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String land = prefs.getString("velgSpråk", "no");
-        Locale locale = getResources().getConfiguration().locale;
-
-        if(!locale.toString().equals(land)) {
-            byttLocale(land);
-            recreate();
-        }
     }
 
     @Override

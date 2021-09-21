@@ -34,15 +34,6 @@ public class FrontPageActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), StatisticsActivity.class);
             startActivity(intent);
         });
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String land = prefs.getString("velgSpråk", "no");
-        Locale locale = getResources().getConfiguration().locale;
-
-        if(!locale.toString().equals(land)) {
-            byttLocale(land);
-            recreate();
-        }
     }
 
     public void rotering(View view){
@@ -69,15 +60,6 @@ public class FrontPageActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String land = prefs.getString("velgSpråk", "no");
-        Locale locale = getResources().getConfiguration().locale;
-
-        if(!locale.toString().equals(land)) {
-            byttLocale(land);
-            recreate();
-        }
     }
 
     @Override

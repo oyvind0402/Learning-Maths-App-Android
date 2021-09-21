@@ -10,7 +10,7 @@
     <string name="endre_språk">Sprache ändern</string>
     <string name="endre_ant_spm">Ändern Sie die Anzahl der Fragen</string>
     <string name="endre_ant_spm_info">Wechseln Sie zu 5, 10 oder 15</string>
-    <string name="fjern">Fernbedienung</string>
+    <string name="fjern">Löschen</string>
     <string name="svar">Antworten</string>
     <string name="riktige_svar">Korrekte Antworten: </string>
     <string name="feil_svar">Falsche Antworten: </string>
@@ -24,6 +24,9 @@
     <string name="totalt_antall_riktige">Gesamtzahl richtiger Antworten:</string>
     <string name="totalt_antall_feil">Gesamtzahl der falschen Antworten:</string>
     <string name="erdusikker">Möchten Sie wirklich zurück? Das Spiel wird beendet und Sie müssen neu starten.</string>
+    <string name="tom_for_spm">Es ist völlig frei von Fragen! Sie haben alle Fragen beantwortet. Drücken Sie OK, um das Spiel zu beenden. :)</string>
+    <string name="tom_tittel">Spiel beendet!</string>
+    <string name="ok">Ok</string>
     <string name="_8">8</string>
     <string name="_7">7</string>
     <string name="_9">9</string>
