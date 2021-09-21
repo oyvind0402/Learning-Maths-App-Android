@@ -6,9 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
+import android.transition.ChangeImageTransform;
+import android.transition.Transition;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,6 +31,10 @@ import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, FerdigSpillDialog.DialogClickListener{
     ArrayList<String> alleRegneStykker = new ArrayList();
@@ -218,7 +229,32 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             editor.putString("antallSpill", String.valueOf(antallSpill));
             editor.apply();
 
-            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+            //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
+            KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
+
+            viewKonfetti.build()
+                    .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                    .setDirection(0.0, 359.0)
+                    .setSpeed(1f, 5f)
+                    .setFadeOutEnabled(true)
+                    .setTimeToLive(2000L)
+                    .addShapes(Shape.RECT, Shape.CIRCLE)
+                    .addSizes(new Size(12, 5))
+                    .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
+                    .streamFor(300, 2500);
+
+            //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
+            // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
+            viewKonfetti.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
+                    fortsett.setCancelable(false);
+                    fortsett.show(getSupportFragmentManager(), "Avslutt?");
+                }
+            }, 1000);
+
+            /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
                     R.anim.rotation);
             LinearLayout spill = findViewById(R.id.spill);
             spill.startAnimation(animation);
@@ -232,7 +268,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     fortsett.setCancelable(false);
                     fortsett.show(getSupportFragmentManager(), "Avslutt?");
                 }
-            }, 1100);
+            }, 1100);*/
         }
 
 
