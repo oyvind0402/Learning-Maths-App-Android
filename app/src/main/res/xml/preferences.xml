@@ -6,7 +6,7 @@
             app:entryValues="@array/velgSpråkValues"
             app:key="velgSpråk"
             app:title="@string/endre_språk"
-            app:summary="@string/språk_forklaring"/>
+            app:summary="@string/språk_forklaring" />
     </PreferenceCategory>
     <PreferenceCategory>
         <ListPreference
