@@ -266,5 +266,17 @@
             app:backgroundTint="@color/enter" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/riktigesvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/feilsvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"/>
+
 
 </LinearLayout>

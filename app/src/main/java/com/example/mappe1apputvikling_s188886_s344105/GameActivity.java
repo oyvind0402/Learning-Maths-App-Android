@@ -1,6 +1,7 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
@@ -43,12 +45,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         startSpill(findViewById(R.layout.spill));
     }
 
-    /*  Metode for å lage en popup når man trykker på tilbakeknappen - skal skrive den i morgen!
+
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
+        if(startetSpill) {
+            new AlertDialog.Builder(this).setTitle(R.string.avslutt_fortsett).setMessage(R.string.erdusikker).setPositiveButton(R.string.fortsettspill, null).setNegativeButton(R.string.avsluttspill, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    GameActivity.super.onBackPressed();
+                }
+            }).create().show();
+        }
     }
-     */
+
 
     @SuppressLint("ResourceType")
     @Override
@@ -108,6 +117,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     // en dialogboks for å si ifra til spilleren at det er tomt for spørsmål.
 
     // Mangler også å lagre alle verdier til SharedPreferences sånn at spillet henter verdier fra SharedPreferences i stedet for fra variabler her ettersom de blir reset når man bytter til landscape modus.
+    @SuppressLint("SetTextI18n")
     public void startSpill(View v) {
         alleRegneStykker.clear();
         alleRegneStykkerSvar.clear();
@@ -121,12 +131,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         nyRegneStykke();
 
-
-
-        /*TextView avsluttSpill = findViewById(R.id.riktigesvar);
+        TextView avsluttSpill = findViewById(R.id.riktigesvar);
         TextView avsluttSpill2 = findViewById(R.id.feilsvar);
-        avsluttSpill.setText(getResources().getString(R.string.riktige_svar));
-        avsluttSpill2.setText(getResources().getString(R.string.feil_svar));*/
+        avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
+        avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
     }
 
@@ -143,6 +151,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         alleRegneStykkerSvar.add(svar);
     }
 
+    @SuppressLint("SetTextI18n")
     public void svar(View v) {
         if(alleRegneStykker.size() == antallRegnestykker) {
             startetSpill = false;
@@ -163,7 +172,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if(startetSpill){
             nyRegneStykke();
+
+            TextView avsluttSpill = findViewById(R.id.riktigesvar);
+            TextView avsluttSpill2 = findViewById(R.id.feilsvar);
+            avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
+            avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
         } else {
+            TextView avsluttSpill = findViewById(R.id.riktigesvar);
+            TextView avsluttSpill2 = findViewById(R.id.feilsvar);
+            avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
+            avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
+
             SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
             @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
 

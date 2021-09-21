@@ -21,35 +21,35 @@
     <string-array name="regneStykker">
         <item>2 + 2 =</item>
         <item>7 + 1 =</item>
-        <item>2 x 3 =</item>
-        <item>8 : 2 =</item>
-        <item>0 x 10 =</item>
-        <item>3 + 7 =</item>
-        <item>6 : 3 =</item>
-        <item>9 + 5 =</item>
-        <item>13 - 4 =</item>
-        <item>6 - 2 =</item>
         <item>2 + 3 =</item>
-        <item>4 x 3 =</item>
-        <item>5 + 8 =</item>
-        <item>2 x 6 =</item>
-        <item>12 : 6 =</item>
+        <item>8 + 1 =</item>
+        <item>0 + 10 =</item>
+        <item>1 + 0 =</item>
+        <item>6 + 7 =</item>
+        <item>9 + 5 =</item>
+        <item>13 + 4 =</item>
+        <item>1 + 2 =</item>
+        <item>2 + 5 =</item>
+        <item>4 + 2 =</item>
+        <item>2 + 9 =</item>
+        <item>2 + 6 =</item>
+        <item>12 + 8 =</item>
     </string-array>
     <string-array name="regneStykkeSvar">
         <item>4</item>
         <item>8</item>
-        <item>6</item>
-        <item>4</item>
-        <item>0</item>
-        <item>10</item>
-        <item>2</item>
-        <item>14</item>
-        <item>9</item>
-        <item>4</item>
         <item>5</item>
-        <item>12</item>
+        <item>9</item>
+        <item>10</item>
+        <item>1</item>
         <item>13</item>
-        <item>12</item>
-        <item>2</item>
+        <item>14</item>
+        <item>17</item>
+        <item>3</item>
+        <item>7</item>
+        <item>6</item>
+        <item>11</item>
+        <item>8</item>
+        <item>20</item>
     </string-array>
 </resources>

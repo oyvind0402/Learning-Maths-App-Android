@@ -23,6 +23,7 @@
     <string name="totalt_antall_spill">Totalt antall spill:</string>
     <string name="totalt_antall_riktige">Totalt antall riktige svar:</string>
     <string name="totalt_antall_feil">Totalt antall feil svar:</string>
+    <string name="erdusikker">Er du sikker på at du vil gå tilbake? Spillet vil avsluttes og du må starte på nytt.</string>
     <string name="_8">8</string>
     <string name="_7">7</string>
     <string name="_9">9</string>

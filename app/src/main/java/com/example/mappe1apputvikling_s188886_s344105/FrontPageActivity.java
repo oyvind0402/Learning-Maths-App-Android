@@ -96,5 +96,6 @@ public class FrontPageActivity extends AppCompatActivity {
     public void visPreferanser(View v) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+        finish();
     }
 }
