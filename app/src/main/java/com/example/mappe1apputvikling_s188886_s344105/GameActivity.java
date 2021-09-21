@@ -213,7 +213,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     fortsett.setCancelable(false);
                     fortsett.show(getSupportFragmentManager(), "Avslutt?");
                 }
-            }, 1600);
+            }, 1100);
         }
 
 
