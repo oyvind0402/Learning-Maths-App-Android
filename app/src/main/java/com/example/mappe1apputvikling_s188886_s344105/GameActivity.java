@@ -37,11 +37,13 @@ import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, FerdigSpillDialog.DialogClickListener{
-    ArrayList<String> alleRegneStykker = new ArrayList();
-    ArrayList<Integer> alleRegneStykkerSvar = new ArrayList();
+    String[] spm;
+    String[] svar;
+    ArrayList<Integer> order = new ArrayList<>();
     private int riktigeSvar = 0;
     private int feilSvar = 0;
     private int antallRegnestykker = 0;
+    private int svarteRegnestykker = 0;
     private boolean startetSpill = false;
     private int antallSpill = 0;
 
@@ -130,155 +132,123 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     // Mangler også å lagre alle verdier til SharedPreferences sånn at spillet henter verdier fra SharedPreferences i stedet for fra variabler her ettersom de blir reset når man bytter til landscape modus.
     @SuppressLint("SetTextI18n")
     public void startSpill(View v) {
-        alleRegneStykker.clear();
-        alleRegneStykkerSvar.clear();
-        riktigeSvar = 0;
-        feilSvar = 0;
+        order.clear();
         startetSpill = true;
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String antSpm = prefs.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
 
-        nyRegneStykke();
+        spm = getResources().getStringArray(R.array.regneStykker);
+        svar = getResources().getStringArray(R.array.regneStykkeSvar);
 
+        for(int i = 0; i < 15; i++){
+            order.add(i);
+        }
+
+        setRegneStykke();
         TextView avsluttSpill = findViewById(R.id.riktigesvar);
         TextView avsluttSpill2 = findViewById(R.id.feilsvar);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
-
     }
 
-    public void nyRegneStykke(){
-        int tall1 = (int)(Math.random() * 10);
-        int tall2 = (int)(Math.random() * 10);
-
-        String regneStykkeSpm = tall1 + " + " + tall2 + " =";
-        alleRegneStykker.add(regneStykkeSpm);
+    @SuppressLint("SetTextI18n")
+    private void setRegneStykke() {
         TextView regneStykke = findViewById(R.id.regnestykke);
-        regneStykke.setText(regneStykkeSpm);
-
-        int svar = tall1 + tall2;
-        alleRegneStykkerSvar.add(svar);
+        regneStykke.setText(spm[svarteRegnestykker]);
+        svarteRegnestykker += 1;
     }
 
     @SuppressLint("SetTextI18n")
     public void svar(View v) {
-        if(alleRegneStykker.size() == antallRegnestykker) {
-            startetSpill = false;
-        }
+        TextView skrevetSvar = findViewById(R.id.svar);
+        String gitSvar = (String) skrevetSvar.getText();
+        skrevetSvar.setText("");
 
-        TextView svar = findViewById(R.id.svar);
-        String gitSvar = (String) svar.getText();
-        int gitSvarInt = Integer.parseInt(gitSvar);
-        int korrektSvar = alleRegneStykkerSvar.get(alleRegneStykkerSvar.size() - 1);
-        svar.setText("");
+        if(gitSvar.length() > 0) {
+            int gitSvarInt = Integer.parseInt(gitSvar);
+            int korrektSvar = Integer.parseInt(svar[antallRegnestykker]);
 
-        if(gitSvarInt == korrektSvar){
-            riktigeSvar += 1;
-        } else {
-            feilSvar += 1;
-        }
+            if(gitSvarInt == korrektSvar){
+                riktigeSvar += 1;
+            } else {
+                feilSvar += 1;
+            }
 
-
-        if(startetSpill){
-            nyRegneStykke();
+            if(svarteRegnestykker % antallRegnestykker == 0) {
+                startetSpill = false;
+            }
 
             TextView avsluttSpill = findViewById(R.id.riktigesvar);
             TextView avsluttSpill2 = findViewById(R.id.feilsvar);
             avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
             avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
-        } else {
-            TextView avsluttSpill = findViewById(R.id.riktigesvar);
-            TextView avsluttSpill2 = findViewById(R.id.feilsvar);
-            avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
-            avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
-            SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+            if(startetSpill){
+                setRegneStykke();
+            } else {
+                SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
 
-            String totalRiktigeString = setPrefs.getString("riktigeSvar", "");
-            int totalRiktige = 0;
-            try {
-                totalRiktige = Integer.parseInt(totalRiktigeString);
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            String totalFeilString = setPrefs.getString("feilSvar", "");
-            int totalFeil = 0;
-            try {
-                totalFeil = Integer.parseInt(totalFeilString);
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            String totalAntallSpillString = setPrefs.getString("antallSpill", "");
-            try {
-                antallSpill = Integer.parseInt(totalAntallSpillString);
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            antallSpill += 1;
-            totalRiktige += riktigeSvar;
-            totalFeil += feilSvar;
-
-            editor.putString("riktigeSvar", String.valueOf(totalRiktige));
-            editor.putString("feilSvar", String.valueOf(totalFeil));
-            editor.putString("antallSpill", String.valueOf(antallSpill));
-            editor.apply();
-
-            //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
-            KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
-
-            //viewKonfetti.bringToFront();
-
-
-            viewKonfetti.build()
-                    .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
-                    .setDirection(0.0, 359.0)
-                    .setSpeed(1f, 5f)
-                    .setFadeOutEnabled(true)
-                    .setTimeToLive(2000L)
-                    .addShapes(Shape.RECT, Shape.CIRCLE)
-                    .addSizes(new Size(12, 5))
-                    .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
-                    .streamFor(300, 2500);
-
-
-
-
-            //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
-            // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
-            viewKonfetti.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
-                    fortsett.setCancelable(false);
-                    fortsett.show(getSupportFragmentManager(), "Avslutt?");
+                String totalRiktigeString = setPrefs.getString("riktigeSvar", "");
+                int totalRiktige = 0;
+                try {
+                    totalRiktige = Integer.parseInt(totalRiktigeString);
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
                 }
-            }, 200);
 
-
-            /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                    R.anim.rotation);
-            LinearLayout spill = findViewById(R.id.spill);
-            spill.startAnimation(animation);
-
-            //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
-            // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
-            spill.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
-                    fortsett.setCancelable(false);
-                    fortsett.show(getSupportFragmentManager(), "Avslutt?");
+                String totalFeilString = setPrefs.getString("feilSvar", "");
+                int totalFeil = 0;
+                try {
+                    totalFeil = Integer.parseInt(totalFeilString);
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
                 }
-            }, 1100);*/
+
+                String totalAntallSpillString = setPrefs.getString("antallSpill", "");
+                try {
+                    antallSpill = Integer.parseInt(totalAntallSpillString);
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                antallSpill += 1;
+                totalRiktige += riktigeSvar;
+                totalFeil += feilSvar;
+
+                editor.putString("riktigeSvar", String.valueOf(totalRiktige));
+                editor.putString("feilSvar", String.valueOf(totalFeil));
+                editor.putString("antallSpill", String.valueOf(antallSpill));
+                editor.apply();
+
+                //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
+                KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
+
+                viewKonfetti.build()
+                        .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                        .setDirection(0.0, 359.0)
+                        .setSpeed(1f, 5f)
+                        .setFadeOutEnabled(true)
+                        .setTimeToLive(2000L)
+                        .addShapes(Shape.RECT, Shape.CIRCLE)
+                        .addSizes(new Size(12, 5))
+                        .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
+                        .streamFor(300, 2500);
+
+                //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
+                // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
+                viewKonfetti.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
+                        fortsett.setCancelable(false);
+                        fortsett.show(getSupportFragmentManager(), "Avslutt?");
+                    }
+                }, 200);
+            }
         }
-
-
     }
 
     @SuppressLint({"NonConstantResourceId", "SetTextI18n", "ResourceType"})
