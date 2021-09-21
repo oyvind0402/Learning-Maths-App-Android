@@ -1,24 +1,27 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, FerdigSpillDialog.DialogClickListener{
     ArrayList<String> alleRegneStykker = new ArrayList();
@@ -63,6 +66,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             byttLocale(land);
             recreate();
         }
+    }
+
+    public void rotering(View view){
+        ImageView image = (ImageView)findViewById(R.id.imageView);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotation);
+        image.startAnimation(animation);
     }
 
     @Override
@@ -189,10 +199,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             editor.putString("antallSpill", String.valueOf(antallSpill));
             editor.apply();
 
-            // Spillet er ferdig opp med pop upen
-            DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
-            fortsett.setCancelable(false);
-            fortsett.show(getSupportFragmentManager(), "Avslutt?");
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                    R.anim.rotation);
+            LinearLayout spill = findViewById(R.id.spill);
+            spill.startAnimation(animation);
+
+            //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
+            // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
+            spill.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
+                    fortsett.setCancelable(false);
+                    fortsett.show(getSupportFragmentManager(), "Avslutt?");
+                }
+            }, 1600);
         }
 
 

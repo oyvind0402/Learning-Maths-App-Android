@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spill"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:duplicateParentState="true"
@@ -42,6 +43,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:contentDescription="@string/app_icon"
+            android:onClick="rotering"
             app:srcCompat="@drawable/icon" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -73,7 +75,6 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,12 +86,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk7"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk7"
             android:text="@string/_7"
+            android:textSize="25sp"
             app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
@@ -99,13 +100,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk8"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk8"
             android:text="@string/_8"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/button9"
@@ -113,13 +114,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk9"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk9"
             android:text="@string/_9"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
     </LinearLayout>
 
     <LinearLayout
@@ -133,13 +134,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk4"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk4"
             android:text="@string/_4"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/button5"
@@ -147,13 +148,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk5"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk5"
             android:text="@string/_5"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/button6"
@@ -161,13 +162,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk6"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk6"
             android:text="@string/_6"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
     </LinearLayout>
 
     <LinearLayout
@@ -181,13 +182,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk1"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk1"
             android:text="@string/_1"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/button2"
@@ -195,13 +196,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk2"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk2"
             android:text="@string/_2"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/button3"
@@ -209,14 +210,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
-            android:onClick="trykk3"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
+            android:onClick="trykk3"
             android:text="@string/_3"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -224,37 +226,36 @@
 
         <Button
             android:id="@+id/button0"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
-            android:textSize="25sp"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
-            android:text="@string/_0"
             android:onClick="trykk0"
-            android:layout_width="0dp"
-            app:backgroundTint="@color/kalkulatorKnap"/>
+            android:text="@string/_0"
+            android:textSize="25sp"
+            app:backgroundTint="@color/kalkulatorKnap" />
 
         <Button
             android:id="@+id/buttonNullstille"
-            android:layout_height="match_parent"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
             android:insetLeft="10dp"
             android:insetRight="10dp"
             android:insetBottom="10dp"
-            android:text="@string/fjern"
             android:onClick="fjern"
-            app:backgroundTint="@color/fjernKnap"
-            />
+            android:text="@string/fjern"
+            app:backgroundTint="@color/fjernKnap" />
 
 
         <Button
             android:id="@+id/buttonEquals"
-            android:layout_height="match_parent"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/covered_by_your_grace"
             android:insetLeft="10dp"
@@ -262,11 +263,8 @@
             android:insetBottom="10dp"
             android:onClick="svar"
             android:text="@string/svar"
-            app:backgroundTint="@color/enter"
-            />
+            app:backgroundTint="@color/enter" />
     </LinearLayout>
-
-
 
 
 </LinearLayout>

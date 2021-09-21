@@ -10,7 +10,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.Locale;
 
@@ -40,6 +43,13 @@ public class FrontPageActivity extends AppCompatActivity {
             byttLocale(land);
             recreate();
         }
+    }
+
+    public void rotering(View view){
+        ImageView image = (ImageView)findViewById(R.id.imageView);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotation);
+        image.startAnimation(animation);
     }
 
     @Override

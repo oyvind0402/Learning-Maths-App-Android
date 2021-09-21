@@ -1,5 +1,7 @@
 Landscape mode slik at alt lagres og ikke blir borte
 
+Make the design more child proof
+
 Ekstra:
 - Mer statistikk, se på forrige spill
 - legge til fyrverkeri eller noe sånt

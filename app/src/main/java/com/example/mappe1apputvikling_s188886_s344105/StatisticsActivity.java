@@ -7,6 +7,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +50,13 @@ public class StatisticsActivity extends AppCompatActivity {
             byttLocale(land);
             recreate();
         }
+    }
+
+    public void rotering(View view){
+        ImageView image = (ImageView)findViewById(R.id.imageView);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotation);
+        image.startAnimation(animation);
     }
 
     public void slettStatistikk(View view) {

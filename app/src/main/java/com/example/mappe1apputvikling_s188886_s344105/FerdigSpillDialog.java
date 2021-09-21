@@ -2,8 +2,13 @@ package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -32,6 +37,8 @@ public class FerdigSpillDialog extends DialogFragment {
             throw new ClassCastException(exception.getMessage());
         }
     }
+
+
 
     @NonNull
     @Override
