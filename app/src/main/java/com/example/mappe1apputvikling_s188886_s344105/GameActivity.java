@@ -8,7 +8,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,7 +28,7 @@ import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener, FerdigSpillDialog.DialogClickListener{
+public class GameActivity extends AppCompatActivity implements View.OnClickListener, FinishedGameDialog.DialogClickListener{
     String[] spm;
     String[] svar;
     ArrayList<Integer> order = new ArrayList<>();
@@ -74,7 +73,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }).create().show();
         } else {
-            startSpill(findViewById(R.layout.spill));
+            startSpill(findViewById(R.layout.game));
         }
     }
 
@@ -103,10 +102,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         Collections.shuffle(order);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.spill);
+        setContentView(R.layout.game);
         setButtons();
 
-        startSpill(findViewById(R.layout.spill));
+        startSpill(findViewById(R.layout.game));
     }
 
     public void rotering(View view){
@@ -328,7 +327,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 viewKonfetti.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        DialogFragment fortsett = new FerdigSpillDialog(riktigeSvar, feilSvar);
+                        DialogFragment fortsett = new FinishedGameDialog(riktigeSvar, feilSvar);
                         fortsett.setCancelable(false);
                         fortsett.show(getSupportFragmentManager(), "Avslutt?");
                     }

@@ -8,12 +8,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-public class FerdigSpillDialog extends DialogFragment {
+public class FinishedGameDialog extends DialogFragment {
     private DialogClickListener listener;
     private final int antallRiktig;
     private final int antallFeil;
 
-    public FerdigSpillDialog(int riktig, int feil) {
+    public FinishedGameDialog(int riktig, int feil) {
         antallRiktig = riktig;
         antallFeil = feil;
     }

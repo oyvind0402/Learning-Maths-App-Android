@@ -21,7 +21,7 @@ public class StatisticsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.statistikk);
+        setContentView(R.layout.statistics);
 
         TextView antallSpill = findViewById(R.id.antallSpill);
         TextView antallRiktige = findViewById(R.id.riktigeSvarStatistikk);
