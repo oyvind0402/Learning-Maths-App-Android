@@ -78,6 +78,7 @@
         android:insetTop="10dp"
         android:insetRight="25dp"
         android:insetBottom="10dp"
+        android:onClick="visPreferanser"
         android:text="@string/preferanser"
         app:backgroundTint="@color/preferanser" />
 

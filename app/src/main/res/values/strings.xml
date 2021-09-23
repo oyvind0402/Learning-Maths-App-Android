@@ -26,6 +26,8 @@
     <string name="erdusikker">Er du sikker på at du vil gå tilbake? Spillet vil avsluttes og du må starte på nytt.</string>
     <string name="tom_for_spm">Det er helt tomt for spørsmål! Du har svart på alle spørsmålene. Trykk ok for å gå ut av spillet. :)</string>
     <string name="tom_tittel">Spill ferdig!</string>
+    <string name="svar_ikon">👌</string>
+    <string name="fjern_ikon">❎</string>
     <string name="ok">Ok</string>
     <string name="_8">8</string>
     <string name="_7">7</string>

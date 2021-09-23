@@ -26,6 +26,8 @@
     <string name="erdusikker">Möchten Sie wirklich zurück? Das Spiel wird beendet und Sie müssen neu starten.</string>
     <string name="tom_for_spm">Es ist völlig frei von Fragen! Sie haben alle Fragen beantwortet. Drücken Sie OK, um das Spiel zu beenden. :)</string>
     <string name="tom_tittel">Spiel beendet!</string>
+    <string name="svar_ikon">👌</string>
+    <string name="fjern_ikon">❎</string>
     <string name="ok">Ok</string>
     <string name="_8">8</string>
     <string name="_7">7</string>
