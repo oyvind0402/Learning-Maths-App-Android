@@ -34,6 +34,15 @@ public class FrontPageActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), StatisticsActivity.class);
             startActivity(intent);
         });
+        SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        SharedPreferences.Editor editor = editPrefs.edit();
+        editor.putString("riktigeSvarMellomlagret", "");
+        editor.putString("feilSvarMellomlagret", "");
+        editor.putString("antallSpillMellomlagret", "");
+        editor.putString("svarteRegnestykker", "");
+        editor.putString("orderTall", "");
+        editor.putString("startetSpill", "");
+        editor.apply();
     }
 
     public void rotering(View view){
@@ -53,7 +62,9 @@ public class FrontPageActivity extends AppCompatActivity {
 
         if(!locale.toString().equals(land)) {
             byttLocale(land);
-            recreate();
+            Intent intent = new Intent(this, FrontPageActivity.class);
+            finish();
+            startActivity(intent);
         }
     }
 

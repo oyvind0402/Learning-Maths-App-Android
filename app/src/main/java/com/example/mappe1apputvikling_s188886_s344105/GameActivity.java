@@ -2,6 +2,7 @@ package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -42,6 +43,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCancelClick() {
+        //Alle verdier resettes når du trykker på avslutt
+        SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        SharedPreferences.Editor editor = editPrefs.edit();
+        editor.putString("riktigeSvarMellomlagret", "");
+        editor.putString("feilSvarMellomlagret", "");
+        editor.putString("antallSpillMellomlagret", "");
+        editor.putString("svarteRegnestykker", "");
+        editor.putString("orderTall", "");
+        editor.putString("startetSpill", "");
+        editor.apply();
+        svarteRegnestykker = 0;
+        riktigeSvar = 0;
+        antallSpill = 0;
+        feilSvar = 0;
         avslutt = true;
         finish();
     }
@@ -65,7 +80,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     editor.apply();
                     svarteRegnestykker = 0;
                     riktigeSvar = 0;
-                    antallRegnestykker = 0;
                     antallSpill = 0;
                     feilSvar = 0;
                     avslutt = true;
@@ -84,6 +98,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.avslutt_fortsett).setMessage(R.string.erdusikker).setPositiveButton(R.string.fortsettspill, null).setNegativeButton(R.string.avsluttspill, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    //Alle verdier resettes når du trykker tilbake
+                    SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = editPrefs.edit();
+                    editor.putString("riktigeSvarMellomlagret", "");
+                    editor.putString("feilSvarMellomlagret", "");
+                    editor.putString("antallSpillMellomlagret", "");
+                    editor.putString("svarteRegnestykker", "");
+                    editor.putString("orderTall", "");
+                    editor.putString("startetSpill", "");
+                    editor.apply();
+                    svarteRegnestykker = 0;
+                    riktigeSvar = 0;
+                    antallSpill = 0;
+                    feilSvar = 0;
                     avslutt = true;
                     finish();
                 }
@@ -122,23 +150,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String land = prefs.getString("velgSpråk", "no");
-        Locale locale = getResources().getConfiguration().locale;
-
-        if(!locale.toString().equals(land)) {
-            byttLocale(land);
-            recreate();
-        }
 
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
 
         SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
 
-        String antallRegnestykkerString = editPrefs.getString("velgAntSpm", "5");
-        antallRegnestykker = Integer.parseInt(antallRegnestykkerString);
+        String antSpm = prefs.getString("velgAntSpm", "5");
+        antallRegnestykker = Integer.parseInt(antSpm);
 
         //Hvis strengene har lengde > 0 vil det si at de har blitt lagret i onPause når man bytter landscape - da kan vi sette verdiene tilbake uten at de resettes
         String riktigeSvarString = editPrefs.getString("riktigeSvarMellomlagret", "0");
+
         if(riktigeSvarString.length() > 0) {
             riktigeSvar = Integer.parseInt(riktigeSvarString);
         }
@@ -187,9 +210,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         regnestykke.setText(spm[order.get(svarteRegnestykker)]);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
+
+        Locale locale = getResources().getConfiguration().locale;
+        if(!locale.toString().equals(land) && !avslutt) {
+            byttLocale(land);
+            Intent intent = new Intent(this, GameActivity.class);
+            finish();
+            startActivity(intent);
+        }
     }
 
     // Må legge til at alle verdier blir lagret til shared preferences når onPause kalles - og så må vi hente verdiene tilbake i onResume.
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onPause() {
         if(!avslutt) {
@@ -223,7 +255,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String antSpm = prefs.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
-
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
 
@@ -257,7 +288,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 feilSvar += 1;
             }
 
-            if(svarteRegnestykker % antallRegnestykker == 0) {
+            if(svarteRegnestykker % antallRegnestykker == 0 && svarteRegnestykker != 0) {
                 startetSpill = false;
             }
 

@@ -36,7 +36,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(!locale.toString().equals(land)) {
             byttLocale(land);
-            recreate();
+            Intent intent = new Intent(this, SettingsActivity.class);
+            finish();
+            startActivity(intent);
         }
     }
 
