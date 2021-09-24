@@ -43,6 +43,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCancelClick() {
+        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+
+        editor.putString("fragmentAktiv", "ikke-aktiv");
+        editor.apply();
         nullStillVerdier();
     }
 
@@ -53,6 +58,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+
+                    editor.putString("fragmentAktiv", "ikke-aktiv");
+                    editor.apply();
                    nullStillVerdier();
                 }
             }).create().show();
@@ -68,11 +78,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("riktigeSvarMellomlagret", "");
         editor.putString("feilSvarMellomlagret", "");
         editor.putString("antallSpillMellomlagret", "");
-        editor.putString("svarteRegnestykker", "");
         editor.putString("orderTall", "");
         editor.putString("startetSpill", "");
         editor.apply();
-        svarteRegnestykker = 0;
         riktigeSvar = 0;
         antallRegnestykker = 0;
         antallSpill = 0;
@@ -88,8 +96,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.avslutt_fortsett).setMessage(R.string.erdusikker).setPositiveButton(R.string.fortsettspill, null).setNegativeButton(R.string.avsluttspill, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    nullStillVerdier();
+                    svarteRegnestykker = 0;
+                    SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
 
+                    editor.putString("fragmentAktiv", "ikke-aktiv");
+                    editor.apply();
+                    nullStillVerdier();
                 }
             }).create().show();
         }
@@ -107,18 +120,30 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
         String aktivFragment = setPrefs.getString("fragmentAktiv", "ikke-aktiv");
-        //DialogFragment fortsett = new FinishedGameDialog(riktigeSvar, feilSvar);
-        DialogFragment fortsett = new FinishedGameDialog();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         setButtons();
-        System.out.println(aktivFragment);
         if(aktivFragment.equals("aktiv")){
             DialogFragment fortsett2 = new FinishedGameDialog();
             fortsett2.setCancelable(false);
             fortsett2.show(getSupportFragmentManager(), "Avslutt?");
         }
+        System.out.println(svarteRegnestykker);
+        System.out.println(order.size());
+        /*if(svarteRegnestykker == order.size()) {
+            new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+
+                    editor.putString("fragmentAktiv", "ikke-aktiv");
+                    editor.apply();
+                    nullStillVerdier();
+                }
+            }).create().show();
+        }*/
 
         startSpill(findViewById(R.layout.game));
 
@@ -325,6 +350,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 totalRiktige += riktigeSvar;
                 totalFeil += feilSvar;
 
+                editor.putString("fragmentRiktigeSvar", String.valueOf(riktigeSvar));
+                editor.putString("fragmentFeilSvar", String.valueOf(feilSvar));
                 editor.putString("riktigeSvar", String.valueOf(totalRiktige));
                 editor.putString("feilSvar", String.valueOf(totalFeil));
                 editor.putString("antallSpill", String.valueOf(antallSpill));

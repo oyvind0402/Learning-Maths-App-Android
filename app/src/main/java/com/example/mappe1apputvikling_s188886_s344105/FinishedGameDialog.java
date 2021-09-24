@@ -13,8 +13,8 @@ import androidx.fragment.app.DialogFragment;
 
 public class FinishedGameDialog extends DialogFragment {
     private DialogClickListener listener;
-    private final int antallRiktig = 0;
-    private final int antallFeil = 2;
+    private int antallRiktig = 0;
+    private int antallFeil = 0;
 
     public FinishedGameDialog(){
 
@@ -32,6 +32,23 @@ public class FinishedGameDialog extends DialogFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        SharedPreferences setPrefs = getActivity().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", Context.MODE_PRIVATE);
+        String totalRiktigeString = setPrefs.getString("fragmentRiktigeSvar", "");
+        int totalRiktige = 0;
+        try {
+            totalRiktige = Integer.parseInt(totalRiktigeString);
+            antallRiktig = totalRiktige;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }String totalFeilString = setPrefs.getString("fragmentFeilSvar", "");
+        int totalFeil = 0;
+        try {
+            totalFeil = Integer.parseInt(totalFeilString);
+            antallFeil = totalFeil;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         super.onCreate(savedInstanceState);
         try {
             listener = (DialogClickListener) getActivity();
@@ -42,10 +59,6 @@ public class FinishedGameDialog extends DialogFragment {
 
     @Override
     public void onDestroy() {
-        /*SharedPreferences setPrefs = this.getActivity().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", Context.MODE_PRIVATE);
-        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
-        editor.putString("fragmentAktiv", "ikke-aktiv");
-        editor.apply();*/
         super.onDestroy();
     }
 
