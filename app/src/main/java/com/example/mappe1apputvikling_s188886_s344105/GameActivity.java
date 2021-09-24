@@ -105,11 +105,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         Collections.shuffle(order);
 
+        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        String aktivFragment = setPrefs.getString("fragmentAktiv", "ikke-aktiv");
+        //DialogFragment fortsett = new FinishedGameDialog(riktigeSvar, feilSvar);
+        DialogFragment fortsett = new FinishedGameDialog();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         setButtons();
+        System.out.println(aktivFragment);
+        if(aktivFragment.equals("aktiv")){
+            DialogFragment fortsett2 = new FinishedGameDialog();
+            fortsett2.setCancelable(false);
+            fortsett2.show(getSupportFragmentManager(), "Avslutt?");
+        }
 
         startSpill(findViewById(R.layout.game));
+
     }
 
     public void rotering(View view){
@@ -253,6 +265,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         String gitSvar = (String) skrevetSvar.getText();
         skrevetSvar.setText("");
 
+        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+
+        editor.putString("fragmentAktiv", "ikke-aktiv");
+        editor.apply();
+
         if(gitSvar.length() > 0) {
             int gitSvarInt = Integer.parseInt(gitSvar);
             int korrektSvar = Integer.parseInt(svar[order.get(svarteRegnestykker)]);
@@ -280,9 +298,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 setRegneStykke();
             } else {
-                SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
-
                 String totalRiktigeString = setPrefs.getString("riktigeSvar", "");
                 int totalRiktige = 0;
                 try {
@@ -334,7 +349,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 viewKonfetti.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        DialogFragment fortsett = new FinishedGameDialog(riktigeSvar, feilSvar);
+                        editor.putString("fragmentAktiv", "aktiv");
+                        editor.apply();
+                        //DialogFragment fortsett = new FinishedGameDialog(riktigeSvar, feilSvar);
+                        DialogFragment fortsett = new FinishedGameDialog();
                         fortsett.setCancelable(false);
                         fortsett.show(getSupportFragmentManager(), "Avslutt?");
                     }

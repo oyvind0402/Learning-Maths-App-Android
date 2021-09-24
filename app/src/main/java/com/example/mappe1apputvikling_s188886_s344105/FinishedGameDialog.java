@@ -1,8 +1,11 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,13 +13,17 @@ import androidx.fragment.app.DialogFragment;
 
 public class FinishedGameDialog extends DialogFragment {
     private DialogClickListener listener;
-    private final int antallRiktig;
-    private final int antallFeil;
+    private final int antallRiktig = 0;
+    private final int antallFeil = 2;
 
-    public FinishedGameDialog(int riktig, int feil) {
+    public FinishedGameDialog(){
+
+    }
+
+    /*public static FinishedGameDialog newInstance(int riktig, int feil) {
         antallRiktig = riktig;
         antallFeil = feil;
-    }
+    }*/
 
     public interface DialogClickListener {
         void onCancelClick();
@@ -33,7 +40,14 @@ public class FinishedGameDialog extends DialogFragment {
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        /*SharedPreferences setPrefs = this.getActivity().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+        editor.putString("fragmentAktiv", "ikke-aktiv");
+        editor.apply();*/
+        super.onDestroy();
+    }
 
     @NonNull
     @Override
