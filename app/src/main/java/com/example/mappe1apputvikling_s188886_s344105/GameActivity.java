@@ -63,7 +63,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
                     editor.putString("fragmentAktiv", "ikke-aktiv");
                     editor.apply();
-                   nullStillVerdier();
+                    nullStillVerdier();
                 }
             }).create().show();
         } else {
@@ -129,9 +129,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             fortsett2.setCancelable(false);
             fortsett2.show(getSupportFragmentManager(), "Avslutt?");
         }
-        System.out.println(svarteRegnestykker);
-        System.out.println(order.size());
-        /*if(svarteRegnestykker == order.size()) {
+
+        String tomForRegnestykker = setPrefs.getString("tomForRegnestykker", "true");
+        if(tomForRegnestykker.equals("true")) {
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -143,7 +143,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     nullStillVerdier();
                 }
             }).create().show();
-        }*/
+        }
 
         startSpill(findViewById(R.layout.game));
 
@@ -220,6 +220,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         TextView regnestykke = findViewById(R.id.regnestykke);
         TextView avsluttSpill = findViewById(R.id.riktigesvar);
         TextView avsluttSpill2 = findViewById(R.id.feilsvar);
+
+        if(svarteRegnestykker == order.size()){
+            svarteRegnestykker = 0;
+            editor.putString("tomForRegnestykker", "true");
+            editor.apply();
+        } else {
+            editor.putString("tomForRegnestykker", "false");
+            editor.apply();
+        }
+
         regnestykke.setText(spm[order.get(svarteRegnestykker)]);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);

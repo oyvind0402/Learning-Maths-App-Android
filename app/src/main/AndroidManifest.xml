@@ -31,20 +31,6 @@
             android:name=".StatisticsActivity"
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
-        <activity
-            android:name=".SettingsFragment"
-            android:exported="true"
-            android:parentActivityName=".SettingsActivity"
-            tools:ignore="Instantiatable"
-            android:screenOrientation="fullSensor"
-            />
-        <activity
-            android:name=".FinishedGameDialog"
-            android:exported="true"
-            android:parentActivityName=".SettingsActivity"
-            tools:ignore="Instantiatable"
-            android:screenOrientation="fullSensor"
-            />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
