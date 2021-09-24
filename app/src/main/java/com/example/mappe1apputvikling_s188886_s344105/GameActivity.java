@@ -43,26 +43,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCancelClick() {
-<<<<<<< HEAD
         nullStillVerdier();
-=======
-        //Alle verdier resettes når du trykker på avslutt
-        SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        SharedPreferences.Editor editor = editPrefs.edit();
-        editor.putString("riktigeSvarMellomlagret", "");
-        editor.putString("feilSvarMellomlagret", "");
-        editor.putString("antallSpillMellomlagret", "");
-        editor.putString("svarteRegnestykker", "");
-        editor.putString("orderTall", "");
-        editor.putString("startetSpill", "");
-        editor.apply();
-        svarteRegnestykker = 0;
-        riktigeSvar = 0;
-        antallSpill = 0;
-        feilSvar = 0;
-        avslutt = true;
-        finish();
->>>>>>> 70fc1e267513bc479c060d587ec6721187c8471c
     }
 
     @SuppressLint("ResourceType")
@@ -72,26 +53,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-<<<<<<< HEAD
                    nullStillVerdier();
-=======
-                    //Alle verdier resettes når du trykker på fortsett og det ikke er flere spørsmål igjen
-                    SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = editPrefs.edit();
-                    editor.putString("riktigeSvarMellomlagret", "");
-                    editor.putString("feilSvarMellomlagret", "");
-                    editor.putString("antallSpillMellomlagret", "");
-                    editor.putString("svarteRegnestykker", "");
-                    editor.putString("orderTall", "");
-                    editor.putString("startetSpill", "");
-                    editor.apply();
-                    svarteRegnestykker = 0;
-                    riktigeSvar = 0;
-                    antallSpill = 0;
-                    feilSvar = 0;
-                    avslutt = true;
-                    finish();
->>>>>>> 70fc1e267513bc479c060d587ec6721187c8471c
+
                 }
             }).create().show();
         } else {
@@ -126,26 +89,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.avslutt_fortsett).setMessage(R.string.erdusikker).setPositiveButton(R.string.fortsettspill, null).setNegativeButton(R.string.avsluttspill, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-<<<<<<< HEAD
                     nullStillVerdier();
-=======
-                    //Alle verdier resettes når du trykker tilbake
-                    SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = editPrefs.edit();
-                    editor.putString("riktigeSvarMellomlagret", "");
-                    editor.putString("feilSvarMellomlagret", "");
-                    editor.putString("antallSpillMellomlagret", "");
-                    editor.putString("svarteRegnestykker", "");
-                    editor.putString("orderTall", "");
-                    editor.putString("startetSpill", "");
-                    editor.apply();
-                    svarteRegnestykker = 0;
-                    riktigeSvar = 0;
-                    antallSpill = 0;
-                    feilSvar = 0;
-                    avslutt = true;
-                    finish();
->>>>>>> 70fc1e267513bc479c060d587ec6721187c8471c
+
                 }
             }).create().show();
         }
