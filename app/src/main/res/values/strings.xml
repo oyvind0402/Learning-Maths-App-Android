@@ -18,7 +18,7 @@
     <string name="din_statistikk">Din statistikk</string>
     <string name="gratulerer">Gratulerer! Vil du spille igjen eller avslutte?</string>
     <string name="avsluttspill">Avslutt</string>
-    <string name="fortsettspill">Start nytt spill!</string>
+    <string name="fortsettspill">Fortsett spillet!</string>
     <string name="avslutt_fortsett">Avslutt eller fortsett?</string>
     <string name="totalt_antall_spill">Totalt antall spill:</string>
     <string name="totalt_antall_riktige">Totalt antall riktige svar:</string>

@@ -130,7 +130,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             fortsett2.show(getSupportFragmentManager(), "Avslutt?");
         }
 
-        String tomForRegnestykker = setPrefs.getString("tomForRegnestykker", "true");
+        String tomForRegnestykker = setPrefs.getString("tomForRegnestykker", "false");
         if(tomForRegnestykker.equals("true")) {
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
