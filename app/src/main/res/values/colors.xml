@@ -7,11 +7,11 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="startKnap">#54B77E</color>
-    <color name="seStatistikk">#1689C9</color>
-    <color name="preferanser">#F6454F</color>
-    <color name="toolbar">#FF9900</color>
-    <color name="enter">#54B77E</color>
-    <color name="fjernKnap">#FF3D41</color>
-    <color name="kalkulatorKnap">#808080</color>
+    <color name="startKnap">#357E53</color>
+    <color name="seStatistikk">#1375AA</color>
+    <color name="preferanser">#E00B15</color>
+    <color name="toolbar">#DB7900</color>
+    <color name="enter">#357E53</color>
+    <color name="fjernKnap">#E00B15</color>
+    <color name="kalkulatorKnap">#707070</color>
 </resources>
