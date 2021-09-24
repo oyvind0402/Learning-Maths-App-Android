@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mappe1apputvikling_s188886_s344105">
 
     <application
@@ -30,6 +31,20 @@
             android:name=".StatisticsActivity"
             android:exported="true"
             android:parentActivityName=".FrontPageActivity" />
+        <activity
+            android:name=".SettingsFragment"
+            android:exported="true"
+            android:parentActivityName=".SettingsActivity"
+            tools:ignore="Instantiatable"
+            android:screenOrientation="fullSensor"
+            />
+        <activity
+            android:name=".FinishedGameDialog"
+            android:exported="true"
+            android:parentActivityName=".SettingsActivity"
+            tools:ignore="Instantiatable"
+            android:screenOrientation="fullSensor"
+            />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

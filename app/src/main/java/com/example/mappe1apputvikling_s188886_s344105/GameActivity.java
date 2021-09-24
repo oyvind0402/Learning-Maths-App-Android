@@ -54,7 +54,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                    nullStillVerdier();
-
                 }
             }).create().show();
         } else {
