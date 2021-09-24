@@ -43,8 +43,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCancelClick() {
-        avslutt = true;
-        finish();
+        nullStillVerdier();
     }
 
     @SuppressLint("ResourceType")
@@ -54,28 +53,32 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //Alle verdier resettes når du trykker på fortsett og det ikke er flere spørsmål igjen
-                    SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = editPrefs.edit();
-                    editor.putString("riktigeSvarMellomlagret", "");
-                    editor.putString("feilSvarMellomlagret", "");
-                    editor.putString("antallSpillMellomlagret", "");
-                    editor.putString("svarteRegnestykker", "");
-                    editor.putString("orderTall", "");
-                    editor.putString("startetSpill", "");
-                    editor.apply();
-                    svarteRegnestykker = 0;
-                    riktigeSvar = 0;
-                    antallRegnestykker = 0;
-                    antallSpill = 0;
-                    feilSvar = 0;
-                    avslutt = true;
-                    finish();
+                   nullStillVerdier();
                 }
             }).create().show();
         } else {
             startSpill(findViewById(R.layout.spill));
         }
+    }
+
+    public void nullStillVerdier(){
+        //Alle verdier resettes når du trykker på fortsett og det ikke er flere spørsmål igjen
+        SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        SharedPreferences.Editor editor = editPrefs.edit();
+        editor.putString("riktigeSvarMellomlagret", "");
+        editor.putString("feilSvarMellomlagret", "");
+        editor.putString("antallSpillMellomlagret", "");
+        editor.putString("svarteRegnestykker", "");
+        editor.putString("orderTall", "");
+        editor.putString("startetSpill", "");
+        editor.apply();
+        svarteRegnestykker = 0;
+        riktigeSvar = 0;
+        antallRegnestykker = 0;
+        antallSpill = 0;
+        feilSvar = 0;
+        avslutt = true;
+        finish();
     }
 
 
@@ -85,8 +88,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.avslutt_fortsett).setMessage(R.string.erdusikker).setPositiveButton(R.string.fortsettspill, null).setNegativeButton(R.string.avsluttspill, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    avslutt = true;
-                    finish();
+                    nullStillVerdier();
                 }
             }).create().show();
         }
@@ -321,7 +323,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         .addShapes(Shape.RECT, Shape.CIRCLE)
                         .addSizes(new Size(12, 5))
                         .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
-                        .streamFor(300, 2500);
+                        .streamFor(300, 1250);
 
                 //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
                 // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
@@ -332,7 +334,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         fortsett.setCancelable(false);
                         fortsett.show(getSupportFragmentManager(), "Avslutt?");
                     }
-                }, 200);
+                }, 250);
             }
         }
     }
