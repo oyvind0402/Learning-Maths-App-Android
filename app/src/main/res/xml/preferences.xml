@@ -5,6 +5,7 @@
             app:entries="@array/velgSpråk"
             app:entryValues="@array/velgSpråkValues"
             app:key="velgSpråk"
+            app:negativeButtonText="@string/avsluttspill"
             app:title="@string/endre_språk"
             app:summary="@string/språk_forklaring" />
     </PreferenceCategory>
@@ -14,6 +15,7 @@
             app:entries="@array/antallSpm"
             app:entryValues="@array/antallSpmValues"
             app:key="velgAntSpm"
+            app:negativeButtonText="@string/avsluttspill"
             app:title="@string/endre_ant_spm"
             app:summary="@string/endre_ant_spm_info"/>
     </PreferenceCategory>

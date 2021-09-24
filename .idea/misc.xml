@@ -3,30 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.7125" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15052083333333333" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/drawable/matte_background.xml" value="0.29635416666666664" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/drawable/matteopplæring_background.xml" value="0.30052083333333335" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/font/covered_by_your_grace.xml" value="0.3145833333333333" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/font/cursive.xml" value="0.74625" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout-land/frontpage.xml" value="0.5046816479400749" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout-land/frontpage_activity.xml" value="0.15873015873015872" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout-land/game.xml" value="0.536" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout/frontpage.xml" value="0.264" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout/frontpage_activity.xml" value="0.1875" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout/game.xml" value="0.72" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout/preferanser.xml" value="0.11930091185410334" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout/spill.xml" value="0.2" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/layout/statistikk.xml" value="0.4" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/menu/main_menu.xml" value="0.28125" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.30052083333333335" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.30052083333333335" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/mipmap-anydpi-v26/matte.xml" value="0.15052083333333333" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/mipmap-anydpi-v26/matte_round.xml" value="0.15052083333333333" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/mipmap-anydpi-v26/matteopplæring.xml" value="0.30052083333333335" />
-        <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/mipmap-anydpi-v26/matteopplæring_round.xml" value="0.30052083333333335" />
         <entry key="..\:/Users/marki/AndroidStudioProjects/mappeoppgave1/Apputvikling-mappe1/app/src/main/res/xml/preferences.xml" value="0.2453125" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout-land/frontpage.xml" value="0.4691358024691358" />
         <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout-land/frontpage_activity.xml" value="0.4691358024691358" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout-land/preferanser.xml" value="0.1" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout-land/spill.xml" value="0.4691358024691358" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout-land/statistics.xml" value="0.6919475655430711" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout-land/statistikk.xml" value="0.4691358024691358" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout/frontpage.xml" value="0.5725" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout/game.xml" value="0.92375" />
+        <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/layout/statistikk.xml" value="0.1" />
         <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/menu/main_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/oyvin/AndroidStudioProjects/Mappe1Apputviklings188886_s344105/app/src/main/res/xml/preferences.xml" value="0.20018115942028986" />
       </map>
