@@ -21,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preferanser);
+        setContentView(R.layout.preferences);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.settings_container, new SettingsFragment()).commit();
     }
@@ -36,7 +36,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(!locale.toString().equals(land)) {
             byttLocale(land);
-            recreate();
+            Intent intent = new Intent(this, SettingsActivity.class);
+            finish();
+            startActivity(intent);
         }
     }
 

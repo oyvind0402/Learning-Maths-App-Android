@@ -1,6 +1,7 @@
 package com.example.mappe1apputvikling_s188886_s344105;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -21,7 +22,7 @@ public class StatisticsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.statistikk);
+        setContentView(R.layout.statistics);
 
         TextView antallSpill = findViewById(R.id.antallSpill);
         TextView antallRiktige = findViewById(R.id.riktigeSvarStatistikk);
@@ -60,9 +61,6 @@ public class StatisticsActivity extends AppCompatActivity {
         editor.apply();
 
         recreate();
-
-
-
     }
 
     @Override
@@ -75,7 +73,9 @@ public class StatisticsActivity extends AppCompatActivity {
 
         if(!locale.toString().equals(land)) {
             byttLocale(land);
-            recreate();
+            Intent intent = new Intent(this, StatisticsActivity.class);
+            finish();
+            startActivity(intent);
         }
     }
 
