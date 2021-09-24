@@ -236,7 +236,8 @@
             android:insetBottom="10dp"
             android:text="@string/_0"
             android:textSize="25sp"
-            app:backgroundTint="@color/kalkulatorKnap" />
+            app:backgroundTint="@color/kalkulatorKnap">
+        </Button>
 
         <Button
             android:id="@+id/buttonNullstille"
