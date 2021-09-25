@@ -144,7 +144,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
 
-        String antSpm = prefs.getString("velgAntSpm", "5");
+        SharedPreferences preferanser = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String antSpm = preferanser.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
 
         //Hvis strengene har lengde > 0 vil det si at de har blitt lagret i onPause når man bytter orientasjon - da kan vi sette verdiene tilbake uten at de resettes til 0
@@ -183,7 +184,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
-        String land = prefs.getString("velgSpråk", "no");
+        String land = preferanser.getString("velgSpråk", "no");
         Locale locale = getResources().getConfiguration().locale;
         if(!locale.toString().equals(land) && !avslutt) {
             byttLocale(land);
@@ -224,7 +225,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void startSpill(View v) {
         startetSpill = true;
 
-        String antSpm = prefs.getString("velgAntSpm", "5");
+        SharedPreferences preferanser = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String antSpm = preferanser.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
