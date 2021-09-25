@@ -401,56 +401,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint({"NonConstantResourceId", "SetTextI18n", "ResourceType"})
     @Override
     public void onClick(View v){ // Denne funksjonen blir aktivert dersom man trykker på 0-9 eller fjern knappen
-        TextView svar = findViewById(R.id.svar);
-        String text = svar.getText().toString();
+        TextView svar = findViewById(R.id.svar); // Henter det som er allerede er i TextView svar
+        String text = svar.getText().toString(); //
 
-        if(svar.getText().toString().length() < 3) { // Det skal ikke være mulig å skrive mer enn 3 tall
-            switch (v.getId()) {
-                case R.id.button0:
-                    svar.setText(text + "0");
-                    break;
-                case R.id.button1:
-                    svar.setText(text + "1");
-                    break;
-                case R.id.button2:
-                    svar.setText(text + "2");
-                    break;
-                case R.id.button3:
-                    svar.setText(text + "3");
-                    break;
-                case R.id.button4:
-                    svar.setText(text + "4");
-                    break;
-                case R.id.button5:
-                    svar.setText(text + "5");
-                    break;
-                case R.id.button6:
-                    svar.setText(text + "6");
-                    break;
-                case R.id.button7:
-                    svar.setText(text + "7");
-                    break;
-                case R.id.button8:
-                    svar.setText(text + "8");
-                    break;
-                case R.id.button9:
-                    svar.setText(text + "9");
-                    break;
-                case R.id.buttonNullstille:
-                    svar.setText("");
-                    break;
-            }
-        } else {
-            if (v.getId() == R.id.buttonNullstille) {
-                svar.setText("");
-            }
-
-            //feedback i tillfelle det er allerede 3 sifre
-
+        if(v.getId() == R.id.buttonNullstille){
+            svar.setText(""); //Fjerne teksten/start på nytt
+        } else if(svar.getText().toString().length() < 3){// Det skal ikke være mulig å skrive mer enn 3 tall
+            Button trykketKnapp = findViewById(v.getId());
+            String tekstIknappen = (String) trykketKnapp.getText();
+            svar.setText(text + tekstIknappen);
         }
     }
 
-    public void setButtons(){
+    public void setButtons(){ //Svar knappen blir ikke tatt med her siden meste av logikken skjer i denne knappen
         Button button0 = findViewById(R.id.button0);
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
@@ -463,17 +426,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         Button button9 = findViewById(R.id.button9);
         Button button10 = findViewById(R.id.buttonNullstille);
 
-        button0.setOnClickListener(this);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-        button4.setOnClickListener(this);
-        button5.setOnClickListener(this);
-        button6.setOnClickListener(this);
-        button7.setOnClickListener(this);
-        button8.setOnClickListener(this);
-        button9.setOnClickListener(this);
-        button10.setOnClickListener(this);
+        Button[] knapper = {button0, button1, button2, button3,button4, button5, button6,button7,button8, button9,button10};
+        for (Button button : knapper) {
+            button.setOnClickListener(this); //Her setter vi en onClick listner slik at vi vet på hvilke knapp brukeren har trykket.
+        }
     }
 
     public void byttLocale(String land) {
