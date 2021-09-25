@@ -174,8 +174,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        //Hvis vi er tom for regnestykker skal vi legge det til i shared preferences
-        if(svarteRegnestykker == order.size()){
+        if(svarteRegnestykker == order.size()){ //Hvis vi er tom for regnestykker skal vi legge det til i shared preferences
             svarteRegnestykker = 0;
             editor.putString("tomForRegnestykker", "true");
         } else {
@@ -323,14 +322,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
                         .streamFor(300, 1000);
 
-                //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
-                // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
-                viewKonfetti.postDelayed(new Runnable() {
+                //Vi må vente til animation er ferdig før vi kan gjøre noe annet. Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
+                viewKonfetti.postDelayed(new Runnable() { //Ellers starter alt samtidig.
                     @Override
                     public void run() {
                         editor.putString("fragmentAktiv", "aktiv");
                         editor.apply();
-                        //DialogFragment fortsett = new FinishedGameDialog(riktigeSvar, feilSvar);
                         DialogFragment fortsett = new FinishedGameDialog();
                         fortsett.setCancelable(false);
                         fortsett.show(getSupportFragmentManager(), "Avslutt?");
