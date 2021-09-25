@@ -41,6 +41,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int antallSpill = 0;
     private boolean avslutt = false;
 
+    // Metodene fra interfacet i FinishedGameDialog
     @Override
     public void onCancelClick() {
         SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
@@ -71,8 +72,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Resetter alle verdier i shared preferences som lagres i onPause - for når man skal avslutte spilling
     public void nullStillVerdier(){
-        //Alle verdier resettes når du trykker på fortsett og det ikke er flere spørsmål igjen
         SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
         SharedPreferences.Editor editor = editPrefs.edit();
         editor.putString("riktigeSvarMellomlagret", "");
@@ -90,6 +91,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //Det kommer en popup som spør om du vil avslutte spiller når du trykker tilbake
     @Override
     public void onBackPressed() {
         if(startetSpill) {
@@ -112,24 +114,27 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         avslutt = false;
+        //Order settes når vi starter spillet / bytter orientasjon - det går fint at den settes hver gang onCreate kjøres ettersom onResume setter verdien til det som er lagret i shared preferences etter at onCreate har kjørt
         order.clear();
         for(int i = 0; i < 15; i++){
             order.add(i);
         }
         Collections.shuffle(order);
 
-        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        String aktivFragment = setPrefs.getString("fragmentAktiv", "ikke-aktiv");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         setButtons();
+
+        //Hvis du endrer orientasjon når en dialogboks er oppe så settes aktivFragment til aktiv, og hvis den er aktiv så skal vi lage en ny popup. Her henter vi verdien.
+        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        String aktivFragment = setPrefs.getString("fragmentAktiv", "ikke-aktiv");
         if(aktivFragment.equals("aktiv")){
             DialogFragment fortsett2 = new FinishedGameDialog();
             fortsett2.setCancelable(false);
             fortsett2.show(getSupportFragmentManager(), "Avslutt?");
         }
 
+        //Sjekker om man er tom for regnestykker, hvis det stemmer og vi er i onCreate så må vi ha byttet orientasjon og da skal vi lage en ny AlertDialog.
         String tomForRegnestykker = setPrefs.getString("tomForRegnestykker", "false");
         if(tomForRegnestykker.equals("true")) {
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -144,9 +149,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }).create().show();
         }
-
         startSpill(findViewById(R.layout.game));
-
     }
 
     public void rotering(View view){
@@ -162,7 +165,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String land = prefs.getString("velgSpråk", "no");
 
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
@@ -172,68 +174,45 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         String antSpm = prefs.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
 
-        //Hvis strengene har lengde > 0 vil det si at de har blitt lagret i onPause når man bytter landscape - da kan vi sette verdiene tilbake uten at de resettes
+        //Hvis strengene har lengde > 0 vil det si at de har blitt lagret i onPause når man bytter orientasjon - da kan vi sette verdiene tilbake uten at de resettes til 0
         String riktigeSvarString = editPrefs.getString("riktigeSvarMellomlagret", "0");
-
-        if(riktigeSvarString.length() > 0) {
-            riktigeSvar = Integer.parseInt(riktigeSvarString);
-        }
         String feilSvarString = editPrefs.getString("feilSvarMellomlagret", "0");
-        if(feilSvarString.length() > 0) {
-            feilSvar = Integer.parseInt(feilSvarString);
-        }
-
         String antallSpillString = editPrefs.getString("antallSpillMellomlagret", "0");
-        if(antallSpillString.length() > 0) {
-            antallSpill = Integer.parseInt(antallSpillString);
-        }
-
         String svarteRegnestykkerString = editPrefs.getString("svarteRegnestykker", "0");
-        if(svarteRegnestykkerString.length() > 0) {
-            svarteRegnestykker = Integer.parseInt(svarteRegnestykkerString);
-        }
-
         String startetSpillString = editPrefs.getString("startetSpill", "false");
-        if(startetSpillString.length() > 0) {
-            startetSpill = Boolean.parseBoolean(startetSpillString);
-        }
-
         String intString = editPrefs.getString("orderTall", "");
-        if(intString.length() > 0) {
+
+        if(riktigeSvarString.length() > 0 && feilSvarString.length() > 0 && antallSpillString.length() > 0 && svarteRegnestykkerString.length() > 0 && startetSpillString.length() > 0 && intString.length() > 0) {
+            riktigeSvar = Integer.parseInt(riktigeSvarString);
+            feilSvar = Integer.parseInt(feilSvarString);
+            antallSpill = Integer.parseInt(antallSpillString);
+            svarteRegnestykker = Integer.parseInt(svarteRegnestykkerString);
+            startetSpill = Boolean.parseBoolean(startetSpillString);
             order.clear();
             for(String s : intString.split(" ")) {
                 order.add(Integer.parseInt(s));
             }
         }
 
-        //Verdiene blir reset etter å ha blitt hentet, for sikkerhets skyld
+        //Hvis vi er tom for regnestykker skal vi legge det til i shared preferences
         SharedPreferences.Editor editor = editPrefs.edit();
-        editor.putString("riktigeSvarMellomlagret", "");
-        editor.putString("feilSvarMellomlagret", "");
-        editor.putString("antallSpillMellomlagret", "");
-        editor.putString("svarteRegnestykker", "");
-        editor.putString("orderTall", "");
-        editor.putString("startetSpill", "");
-        editor.apply();
-
-        //Verdiene blir satt inn i TextViews igjen for å ikke miste dem når vi bytter landscape
-        TextView regnestykke = findViewById(R.id.regnestykke);
-        TextView avsluttSpill = findViewById(R.id.riktigesvar);
-        TextView avsluttSpill2 = findViewById(R.id.feilsvar);
-
         if(svarteRegnestykker == order.size()){
             svarteRegnestykker = 0;
             editor.putString("tomForRegnestykker", "true");
-            editor.apply();
         } else {
             editor.putString("tomForRegnestykker", "false");
-            editor.apply();
         }
+        editor.apply();
 
+        //Verdiene blir satt inn i TextViews igjen for å ikke miste dem når vi bytter orientasjon
+        TextView regnestykke = findViewById(R.id.regnestykke);
+        TextView avsluttSpill = findViewById(R.id.riktigesvar);
+        TextView avsluttSpill2 = findViewById(R.id.feilsvar);
         regnestykke.setText(spm[order.get(svarteRegnestykker)]);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
+        String land = prefs.getString("velgSpråk", "no");
         Locale locale = getResources().getConfiguration().locale;
         if(!locale.toString().equals(land) && !avslutt) {
             byttLocale(land);
@@ -243,7 +222,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // Må legge til at alle verdier blir lagret til shared preferences når onPause kalles - og så må vi hente verdiene tilbake i onResume.
+    // Legger til at alle verdier blir lagret til shared preferences når onPause kalles - og så må vi hente verdiene tilbake i onResume.
     @SuppressLint("SetTextI18n")
     @Override
     protected void onPause() {
@@ -297,26 +276,29 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     public void svar(View v) {
         TextView skrevetSvar = findViewById(R.id.svar);
-        String gitSvar = (String) skrevetSvar.getText();
+        String gittSvar = (String) skrevetSvar.getText();
         skrevetSvar.setText("");
 
         SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
+        SharedPreferences.Editor editor = setPrefs.edit();
 
         editor.putString("fragmentAktiv", "ikke-aktiv");
         editor.apply();
 
-        if(gitSvar.length() > 0) {
-            int gitSvarInt = Integer.parseInt(gitSvar);
+        //Hvis det er skrevet noe i svar textviewet
+        if(gittSvar.length() > 0) {
+            int gittSvarInt = Integer.parseInt(gittSvar);
             int korrektSvar = Integer.parseInt(svar[order.get(svarteRegnestykker)]);
             svarteRegnestykker += 1;
 
-            if(gitSvarInt == korrektSvar){
+            //Hvis svaret er riktig eller feil
+            if(gittSvarInt == korrektSvar){
                 riktigeSvar += 1;
             } else {
                 feilSvar += 1;
             }
 
+            //Hvis antallet svarte regnestykker er det samme som totalt antall regnestykker så skal spillet avsluttes
             if(svarteRegnestykker % antallRegnestykker == 0 && svarteRegnestykker != 0) {
                 startetSpill = false;
             }
@@ -326,13 +308,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
             avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
-
             if(startetSpill){
+                //Hvis det er nest siste spill skal vi sette startetSpill lik false, for så å sette det siste regnestykket
                 if(svarteRegnestykker == order.size() - 1) {
                     startetSpill = false;
                 }
                 setRegneStykke();
-            } else {
+            }
+            //Hvis spillet er ferdig skal statistikker lagres og konfetti animasjonen spilles av og en popup komme opp som spør om man vil fortsette eller avslutte
+            else {
                 String totalRiktigeString = setPrefs.getString("riktigeSvar", "");
                 int totalRiktige = 0;
                 try {
@@ -398,7 +382,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @SuppressLint({"NonConstantResourceId", "SetTextI18n", "ResourceType"})
+    @SuppressLint({"SetTextI18n"})
     @Override
     public void onClick(View v){ // Denne funksjonen blir aktivert dersom man trykker på 0-9 eller fjern knappen
         TextView svar = findViewById(R.id.svar); // Henter det som er allerede er i TextView svar
