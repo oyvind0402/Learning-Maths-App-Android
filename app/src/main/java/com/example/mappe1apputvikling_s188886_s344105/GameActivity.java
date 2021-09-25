@@ -137,13 +137,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         startSpill(findViewById(R.layout.game));
     }
 
-    public void rotering(View view){
-        ImageView image = (ImageView)findViewById(R.id.imageView);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.rotation);
-        image.startAnimation(animation);
-    }
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onResume() {
@@ -309,8 +302,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putString("antallSpill", String.valueOf(antallSpill));
                 editor.apply();
 
-                //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
-                KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
+                KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);  //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
                 viewKonfetti.build()
                         .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
                         .setDirection(0.0, 359.0)
@@ -377,5 +369,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         Configuration cf = res.getConfiguration();
         cf.setLocale(new Locale(land));
         res.updateConfiguration(cf, dm);
+    }
+
+    public void rotering(View view){
+        ImageView image = (ImageView)findViewById(R.id.imageView);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotation);
+        image.startAnimation(animation);
     }
 }
