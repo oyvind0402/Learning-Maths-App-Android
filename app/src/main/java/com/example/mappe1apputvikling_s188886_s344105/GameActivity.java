@@ -43,9 +43,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int antallSpill = 0;
     private boolean avslutt = false;
 
-    // Metodene fra interfacet i FinishedGameDialog
     @Override
-    public void onCancelClick() {
+    public void onCancelClick() {    // Metodene fra interfacet i FinishedGameDialog
         editor.putString("fragmentAktiv", "ikke-aktiv");
         editor.apply();
         nullStillVerdier();
@@ -68,8 +67,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //Resetter alle verdier i shared preferences som lagres i onPause - for når man skal avslutte spilling
-    public void nullStillVerdier(){
+    public void nullStillVerdier(){    //Resetter alle verdier i shared preferences som lagres i onPause - for når man skal avslutte spilling
         editor.putString("riktigeSvarMellomlagret", "");
         editor.putString("feilSvarMellomlagret", "");
         editor.putString("antallSpillMellomlagret", "");
@@ -84,10 +82,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-
-    //Det kommer en popup som spør om du vil avslutte spiller når du trykker tilbake
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {    //Det kommer en popup som spør om du vil avslutte spiller når du trykker tilbake
         if(startetSpill) {
             new AlertDialog.Builder(this).setTitle(R.string.avslutt_fortsett).setMessage(R.string.erdusikker).setPositiveButton(R.string.fortsettspill, null).setNegativeButton(R.string.avsluttspill, new DialogInterface.OnClickListener() {
                 @Override
@@ -108,8 +104,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         editor = prefs.edit();
 
         avslutt = false;
-        //Order settes når vi starter spillet / bytter orientasjon - det går fint at den settes hver gang onCreate kjøres ettersom onResume setter verdien til det som er lagret i shared preferences etter at onCreate har kjørt
-        order.clear();
+        order.clear(); //Order settes når vi starter spillet / bytter orientasjon - det går fint at den settes hver gang onCreate kjøres ettersom onResume setter verdien til det som er lagret i shared preferences etter at onCreate har kjørt
         for(int i = 0; i < 15; i++){
             order.add(i);
         }
@@ -155,7 +150,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
-
 
         String antSpm = prefs.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
@@ -207,10 +201,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // Legger til at alle verdier blir lagret til shared preferences når onPause kalles - og så må vi hente verdiene tilbake i onResume.
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onPause() {
+    protected void onPause() {// Legger til at alle verdier blir lagret til shared preferences når onPause kalles - og så må vi hente verdiene tilbake i onResume.
         if(!avslutt) {
             SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
             SharedPreferences.Editor editor = editPrefs.edit();
@@ -244,17 +237,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
 
-        setRegneStykke();
+        TextView regneStykke = findViewById(R.id.regnestykke);
+        regneStykke.setText(spm[order.get(svarteRegnestykker)]);
         TextView avsluttSpill = findViewById(R.id.riktigesvar);
         TextView avsluttSpill2 = findViewById(R.id.feilsvar);
         avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
         avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void setRegneStykke() {
-        TextView regneStykke = findViewById(R.id.regnestykke);
-        regneStykke.setText(spm[order.get(svarteRegnestykker)]);
     }
 
     @SuppressLint("SetTextI18n")
@@ -266,21 +254,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("fragmentAktiv", "ikke-aktiv");
         editor.apply();
 
-        //Hvis det er skrevet noe i svar textviewet
-        if(gittSvar.length() > 0) {
+        if(gittSvar.length() > 0) {//Hvis det er skrevet noe i svar textviewet
             int gittSvarInt = Integer.parseInt(gittSvar);
             int korrektSvar = Integer.parseInt(svar[order.get(svarteRegnestykker)]);
             svarteRegnestykker += 1;
 
-            //Hvis svaret er riktig eller feil
-            if(gittSvarInt == korrektSvar){
+            if(gittSvarInt == korrektSvar){//Hvis svaret er riktig eller feil
                 riktigeSvar += 1;
             } else {
                 feilSvar += 1;
             }
 
-            //Hvis antallet svarte regnestykker er det samme som totalt antall regnestykker så skal spillet avsluttes
-            if(svarteRegnestykker % antallRegnestykker == 0 && svarteRegnestykker != 0) {
+            if(svarteRegnestykker % antallRegnestykker == 0 && svarteRegnestykker != 0) {//Hvis antallet svarte regnestykker er det samme som totalt antall regnestykker så skal spillet avsluttes
                 startetSpill = false;
             }
 
@@ -289,37 +274,30 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             avsluttSpill.setText(getResources().getString(R.string.riktige_svar) + " " + riktigeSvar);
             avsluttSpill2.setText(getResources().getString(R.string.feil_svar) + " " + feilSvar);
 
-            if(startetSpill){
-                //Hvis det er nest siste spill skal vi sette startetSpill lik false, for så å sette det siste regnestykket
+            if(startetSpill){//Hvis det er nest siste spill skal vi sette startetSpill lik false, for så å sette det siste regnestykket
                 if(svarteRegnestykker == order.size() - 1) {
                     startetSpill = false;
                 }
-                setRegneStykke();
+                TextView regneStykke = findViewById(R.id.regnestykke);
+                regneStykke.setText(spm[order.get(svarteRegnestykker)]);
             }
-            //Hvis spillet er ferdig skal statistikker lagres og konfetti animasjonen spilles av og en popup komme opp som spør om man vil fortsette eller avslutte
-            else {
+            else { //Hvis spillet er ferdig skal statistikker lagres og konfetti animasjonen spilles av og en popup komme opp som spør om man vil fortsette eller avslutte
                 String totalRiktigeString = prefs.getString("riktigeSvar", "");
                 int totalRiktige = 0;
                 try {
                     totalRiktige = Integer.parseInt(totalRiktigeString);
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
+                } catch(Exception e) {System.out.println(e.getMessage());}
 
                 String totalFeilString = prefs.getString("feilSvar", "");
                 int totalFeil = 0;
                 try {
                     totalFeil = Integer.parseInt(totalFeilString);
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
+                } catch(Exception e) {System.out.println(e.getMessage());}
 
                 String totalAntallSpillString = prefs.getString("antallSpill", "");
                 try {
                     antallSpill = Integer.parseInt(totalAntallSpillString);
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
+                } catch(Exception e) { System.out.println(e.getMessage());}
 
                 antallSpill += 1;
                 totalRiktige += riktigeSvar;
@@ -334,17 +312,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
                 //Hentet fra https://stackoverflow.com/questions/52228999/celebration-animation-in-android-studio
                 KonfettiView viewKonfetti = findViewById(R.id.viewKonfetti);
-
                 viewKonfetti.build()
                         .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
                         .setDirection(0.0, 359.0)
                         .setSpeed(1f, 5f)
                         .setFadeOutEnabled(true)
-                        .setTimeToLive(2000L)
+                        .setTimeToLive(1000L)
                         .addShapes(Shape.RECT, Shape.CIRCLE)
                         .addSizes(new Size(12, 5))
                         .setPosition(-50f, viewKonfetti.getWidth() + 50f, -50f, -50f)
-                        .streamFor(300, 1250);
+                        .streamFor(300, 1000);
 
                 //Vi må vente til animation er ferdig før vi kan gjøre noe annet:
                 // Basert på: https://stackoverflow.com/questions/5321344/android-animation-wait-until-finished
