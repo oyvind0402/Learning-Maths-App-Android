@@ -30,6 +30,8 @@ import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, FinishedGameDialog.DialogClickListener{
+    SharedPreferences prefs;
+    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor;
     String[] spm;
     String[] svar;
     ArrayList<Integer> order = new ArrayList<>();
@@ -44,9 +46,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     // Metodene fra interfacet i FinishedGameDialog
     @Override
     public void onCancelClick() {
-        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
-
         editor.putString("fragmentAktiv", "ikke-aktiv");
         editor.apply();
         nullStillVerdier();
@@ -59,9 +58,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
-
                     editor.putString("fragmentAktiv", "ikke-aktiv");
                     editor.apply();
                     nullStillVerdier();
@@ -74,8 +70,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     //Resetter alle verdier i shared preferences som lagres i onPause - for når man skal avslutte spilling
     public void nullStillVerdier(){
-        SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        SharedPreferences.Editor editor = editPrefs.edit();
         editor.putString("riktigeSvarMellomlagret", "");
         editor.putString("feilSvarMellomlagret", "");
         editor.putString("antallSpillMellomlagret", "");
@@ -99,9 +93,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     svarteRegnestykker = 0;
-                    SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
-
                     editor.putString("fragmentAktiv", "ikke-aktiv");
                     editor.apply();
                     nullStillVerdier();
@@ -113,6 +104,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
+        editor = prefs.edit();
+
         avslutt = false;
         //Order settes når vi starter spillet / bytter orientasjon - det går fint at den settes hver gang onCreate kjøres ettersom onResume setter verdien til det som er lagret i shared preferences etter at onCreate har kjørt
         order.clear();
@@ -126,8 +120,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setButtons();
 
         //Hvis du endrer orientasjon når en dialogboks er oppe så settes aktivFragment til aktiv, og hvis den er aktiv så skal vi lage en ny popup. Her henter vi verdien.
-        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        String aktivFragment = setPrefs.getString("fragmentAktiv", "ikke-aktiv");
+        String aktivFragment = prefs.getString("fragmentAktiv", "ikke-aktiv");
         if(aktivFragment.equals("aktiv")){
             DialogFragment fortsett2 = new FinishedGameDialog();
             fortsett2.setCancelable(false);
@@ -135,14 +128,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //Sjekker om man er tom for regnestykker, hvis det stemmer og vi er i onCreate så må vi ha byttet orientasjon og da skal vi lage en ny AlertDialog.
-        String tomForRegnestykker = setPrefs.getString("tomForRegnestykker", "false");
+        String tomForRegnestykker = prefs.getString("tomForRegnestykker", "false");
         if(tomForRegnestykker.equals("true")) {
             new AlertDialog.Builder(this).setTitle(R.string.tom_tittel).setMessage(R.string.tom_for_spm).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = setPrefs.edit();
-
                     editor.putString("fragmentAktiv", "ikke-aktiv");
                     editor.apply();
                     nullStillVerdier();
@@ -163,24 +153,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
         spm = getResources().getStringArray(R.array.regneStykker);
         svar = getResources().getStringArray(R.array.regneStykkeSvar);
 
-        SharedPreferences editPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
 
         String antSpm = prefs.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
 
         //Hvis strengene har lengde > 0 vil det si at de har blitt lagret i onPause når man bytter orientasjon - da kan vi sette verdiene tilbake uten at de resettes til 0
-        String riktigeSvarString = editPrefs.getString("riktigeSvarMellomlagret", "0");
-        String feilSvarString = editPrefs.getString("feilSvarMellomlagret", "0");
-        String antallSpillString = editPrefs.getString("antallSpillMellomlagret", "0");
-        String svarteRegnestykkerString = editPrefs.getString("svarteRegnestykker", "0");
-        String startetSpillString = editPrefs.getString("startetSpill", "false");
-        String intString = editPrefs.getString("orderTall", "");
+        String riktigeSvarString = prefs.getString("riktigeSvarMellomlagret", "0");
+        String feilSvarString = prefs.getString("feilSvarMellomlagret", "0");
+        String antallSpillString = prefs.getString("antallSpillMellomlagret", "0");
+        String svarteRegnestykkerString = prefs.getString("svarteRegnestykker", "0");
+        String startetSpillString = prefs.getString("startetSpill", "false");
+        String intString = prefs.getString("orderTall", "");
 
         if(riktigeSvarString.length() > 0 && feilSvarString.length() > 0 && antallSpillString.length() > 0 && svarteRegnestykkerString.length() > 0 && startetSpillString.length() > 0 && intString.length() > 0) {
             riktigeSvar = Integer.parseInt(riktigeSvarString);
@@ -195,7 +181,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //Hvis vi er tom for regnestykker skal vi legge det til i shared preferences
-        SharedPreferences.Editor editor = editPrefs.edit();
         if(svarteRegnestykker == order.size()){
             svarteRegnestykker = 0;
             editor.putString("tomForRegnestykker", "true");
@@ -254,7 +239,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void startSpill(View v) {
         startetSpill = true;
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String antSpm = prefs.getString("velgAntSpm", "5");
         antallRegnestykker = Integer.parseInt(antSpm);
         spm = getResources().getStringArray(R.array.regneStykker);
@@ -278,9 +262,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         TextView skrevetSvar = findViewById(R.id.svar);
         String gittSvar = (String) skrevetSvar.getText();
         skrevetSvar.setText("");
-
-        SharedPreferences setPrefs = getApplicationContext().getSharedPreferences("com.example.mappe1apputvikling_s188886_s344105", MODE_PRIVATE);
-        SharedPreferences.Editor editor = setPrefs.edit();
 
         editor.putString("fragmentAktiv", "ikke-aktiv");
         editor.apply();
@@ -317,7 +298,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
             //Hvis spillet er ferdig skal statistikker lagres og konfetti animasjonen spilles av og en popup komme opp som spør om man vil fortsette eller avslutte
             else {
-                String totalRiktigeString = setPrefs.getString("riktigeSvar", "");
+                String totalRiktigeString = prefs.getString("riktigeSvar", "");
                 int totalRiktige = 0;
                 try {
                     totalRiktige = Integer.parseInt(totalRiktigeString);
@@ -325,7 +306,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     System.out.println(e.getMessage());
                 }
 
-                String totalFeilString = setPrefs.getString("feilSvar", "");
+                String totalFeilString = prefs.getString("feilSvar", "");
                 int totalFeil = 0;
                 try {
                     totalFeil = Integer.parseInt(totalFeilString);
@@ -333,7 +314,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     System.out.println(e.getMessage());
                 }
 
-                String totalAntallSpillString = setPrefs.getString("antallSpill", "");
+                String totalAntallSpillString = prefs.getString("antallSpill", "");
                 try {
                     antallSpill = Integer.parseInt(totalAntallSpillString);
                 } catch(Exception e) {
